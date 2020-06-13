@@ -22,3 +22,4 @@ Route::get('/search', 'ProfileController@search')->name('search');
 Route::delete('/del_user', 'ProfileController@destroy')->name('del_user');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
+Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
