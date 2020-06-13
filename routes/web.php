@@ -18,4 +18,6 @@ Route::get('/', function () {
 })->name('/');
 Route::resource('user','ProfileController');
 Auth::routes();
+Route::get('/search', 'ProfileController@search')->name('search');
+Route::delete('/del_user', 'ProfileController@destroy')->name('del_user');
 Route::get('/home', 'HomeController@index')->name('home');

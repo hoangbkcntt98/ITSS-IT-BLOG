@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('title')</title>
     <link href="{{ asset('layouts/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('layouts/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -14,7 +15,10 @@
 	<link href="{{ asset('layouts/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('layouts/css/responsive.css') }}" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ asset('layouts/images') }}/ico/favicon.ico">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/datatables.min.js"></script>
 	<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
 </head><!--/head-->
 
@@ -47,6 +51,6 @@
 	<script src="{{ asset('layouts/js/price-range.js') }}"></script>
     <script src="{{ asset('layouts/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('layouts/js/main.js') }}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
 </body>
 </html>

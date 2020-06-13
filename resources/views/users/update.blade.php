@@ -52,7 +52,7 @@
             <label class="col-md-3 control-label"></label>
             <div class="col-md-8">
                 {{Form::submit('Save Changes',['class'=>'btn btn-primary'])}}
-              
+                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
               <span></span>
               <a href="{{route('user.index')}}" class="btn btn-primary">Cancel</a>
             </div>
