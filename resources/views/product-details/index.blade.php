@@ -93,15 +93,15 @@
                         </div>
                     </div>
                     @endforeach
-                    <button type="button" class="btn btn-default pull-right">
-                        Submit
+                    <button type="button" class="btn btn-primary btn-lg pull-right">
+                        Add Reviews
                     </button>
                 </div>
                 @elseif($articles->count()==0)
                     <div>
-                        No Reviews For this product. Please add Reviews the product at here!!!
-                        <button type="button" class="btn btn-default pull-right">
-                            Submit
+                        <h3>No Reviews For this product. Please add Reviews the product at here!!!</h3>
+                        <button type="button" class="btn btn-primary btn-lg pull-right">
+                            Add Reviews
                         </button>
 
                     </div>
