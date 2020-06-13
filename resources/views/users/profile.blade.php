@@ -65,8 +65,10 @@ $(document).ready(function() {
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Information</a></li>
                 @if($user->is_admin==1)
-                <li><a data-toggle="tab" href="#user-manager">User Manager</a></li>
-                <li><a data-toggle="tab" href="#post-manager">Article Manager</a></li>
+                <li><a data-toggle="tab" href="#user-manager">Users</a></li>
+                <li><a data-toggle="tab" href="#post-manager">Articles</a></li>
+                <li><a data-toggle="tab" href="#product-manager">Products</a></li>
+
                 @endif
               </ul>
               
@@ -121,6 +123,8 @@ $(document).ready(function() {
               <hr> 
              </div><!--/tab-pane-->
              @include("users.user-management")
+             @include("users.post-managerment")
+             @include("users.product-management")
           </div><!--/tab-content-->
 
         </div><!--/col-9-->

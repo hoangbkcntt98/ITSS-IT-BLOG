@@ -21,9 +21,11 @@ class ProfileController extends Controller
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
-        $posts = Article::all();
+        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->select('name', 'article.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        $user_article = collect([]);
         $users = User::all();
-        return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts]);        
+        $product = DB::table('product')->get();
+        return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts,'products'=>$product]);        
     }  
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +73,7 @@ class ProfileController extends Controller
             $users = DB::table('users')->where([['name', 'LIKE', '%' . $request->search . '%']])->get();
             if ($users) {
                 foreach ($users as $user) {
-                    $update= Carbon::parse($user->updated_at)->format('d/m/Y');
+                    $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
                     $delete_button="";
                     if($user->is_admin==1){
                         $role = "Admin";
@@ -94,6 +96,55 @@ class ProfileController extends Controller
             return Response($output);
         }
     }
+    public function post_search(Request $request)
+    {
+        if ($request->ajax()) {
+            $posts = DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
+            $output_post = "";
+            if ($posts) {
+                foreach ($posts as $post) {
+                    $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
+                    $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
+                    $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                    $output_post .= "<tr>
+                    <td class='cart_description'><h5>" . $post->name . "</h5></td>
+                    <td class='cart_description'><h5>" . $post->title . "</h5></td>
+                    <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
+                    <td class='cart_description'><h5>" . $create . "</h5></td>
+                    <td class='cart_description'><h5>" . $update . "</h5></td>
+                    <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                    </tr>";
+                }
+            }
+            
+            return Response($output_post);
+        }
+    }
+    public function pro_search(Request $request)
+    {
+        if ($request->ajax()) {
+            $products = DB::table('product')->where([['product_name', 'LIKE', '%' . $request->search . '%']])->get();
+            $output_pro = "";
+            if ($products) {
+                $output_pro = "1";
+                foreach ($products as $pro) {
+                    $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_pro(".$pro->id.")' \>";
+                    $output_pro .= "<tr>
+                    <td class='cart_description'><h5>" . $pro->product_name . "</h5></td>
+                    <td class='cart_description'><h5>" . $pro->CPU. "</h5></td>
+                    <td class='cart_description'><h5>" . $pro->RAM. "</h5></td>
+                    <td class='cart_description'><h5>" . $pro->OS . "</h5></td>
+                    <td class='cart_description'><h5>" . $pro->price . "</h5></td>
+                    <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                    </tr>";
+                }
+            }else{
+                $output_pro = "w";
+            }
+            
+            return Response($output_pro);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -102,15 +153,17 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request)
     {
+       //$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         $user = Auth::user();
         $us = User::findOrFail($request->id); 
         $us->delete();
         $output = '';
         $delete_button="";
         $users = User::all();
+        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->get();
         if ($users) {
             foreach ($users as $user) {
-                $update= Carbon::parse($user->updated_at)->format('d/m/Y');
+                $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
                 $delete_button="";
                 if($user->is_admin==1){
                     $role = "Admin";
@@ -129,8 +182,66 @@ class ProfileController extends Controller
                 </tr>";
             }
         }
-        return Response($output);
-
+        $output_post = "";
+        if ($posts) {
+            foreach ($posts as $post) {
+                $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
+                $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
+                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                $output_post .= "<tr>
+                <td class='cart_description'><h5>" . $post->name . "</h5></td>
+                <td class='cart_description'><h5>" . $post->title . "</h5></td>
+                <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
+                <td class='cart_description'><h5>" . $create . "</h5></td>
+                <td class='cart_description'><h5>" . $update . "</h5></td>
+                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                </tr>";
+            }
+        }
+      
+        return response()->json(['users' => $output, 'posts' => $output_post]);;
     }
-
+    public function destroy_post(Request $request)
+    {
+        $posts_del =DB::table('article')->where('id','=',$request->id)->delete();
+        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->get();
+        $output_post = "";
+        if ($posts) {
+            foreach ($posts as $post) {
+                $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
+                $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
+                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                $output_post .= "<tr>
+                <td class='cart_description'><h5>" . $post->name . "</h5></td>
+                <td class='cart_description'><h5>" . $post->title . "</h5></td>
+                <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
+                <td class='cart_description'><h5>" . $create . "</h5></td>
+                <td class='cart_description'><h5>" . $update . "</h5></td>
+                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                </tr>";
+            }
+        }
+        return Response($output_post);
+    }
+    public function destroy_pro(Request $request)
+    {
+        $pro_del =DB::table('product')->where('id','=',$request->id)->delete();
+        $products = DB::table('product')->get();
+        $output_pro = "";
+        if ($products) {
+            $output_pro = "1";
+            foreach ($products as $pro) {
+                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_pro(".$pro->id.")' \>";
+                $output_pro .= "<tr>
+                <td class='cart_description'><h5>" . $pro->product_name . "</h5></td>
+                <td class='cart_description'><h5>" . $pro->CPU. "</h5></td>
+                <td class='cart_description'><h5>" . $pro->RAM. "</h5></td>
+                <td class='cart_description'><h5>" . $pro->OS . "</h5></td>
+                <td class='cart_description'><h5>" . $pro->price . "</h5></td>
+                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                </tr>";
+            }
+        }    
+        return Response($output_pro);
+    }
 }

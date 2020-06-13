@@ -1,9 +1,3 @@
-<!-- <script>
-$(document).ready(function () {
-$('#table_id').DataTable();
-});
-</script> -->
-
 <div class="tab-pane" id="user-manager">
     <div style = "padding-top:2em;">
 				<div class="form-group">
@@ -20,7 +14,7 @@ $('#table_id').DataTable();
 							<!-- <td ></td> -->
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id = "user">
 						@foreach($users as $us)
                         <tr>
 							<td class="cart_description">
@@ -30,7 +24,7 @@ $('#table_id').DataTable();
                             <h5>{{$us->email}}</h5>
 							</td>
 							<td class="cart_description">
-                            <h5>{{ \Carbon\Carbon::parse($us->updated_at)->format('d/m/Y')}}</h5>
+                            <h5>{{ \Carbon\Carbon::parse($us->updated_at)->format('d/m/Y g:i A')}}</h5>
 							</td>
                             <td class="cart_description">
 								<h5>{{$us->phone}}</h5>
@@ -47,10 +41,7 @@ $('#table_id').DataTable();
                             <td>
                                 @if($us->is_admin==0)
 								 <input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_user({{$us->id}})">
-                           		 <!-- {!! Form::open(['action' => ['ProfileController@destroy',$us->id],'method'=>'POST']) !!}
-									{{Form::hidden('_method','DELETE')}}
-									{{Form::submit('Delete',['class'=>'btn btn-danger'])}}
-                           		 {!! Form::close() !!}    -->
+                           		 
                                 @endif
 							</td>
 						</tr>
@@ -72,10 +63,10 @@ $('#table_id').DataTable();
                         'search': $value
                     },
                     success:function(data){
-                        $('tbody').html(data);
+                        $('#user').html(data);
                     }
                 });
-            })
+            });
 			function del_user(id){
 				console.log(id);
 				$.ajax({
@@ -86,10 +77,12 @@ $('#table_id').DataTable();
                         'id':id
                     }),
                     success:function(data){
-                        $('tbody').html(data);
+                        $('#user').html(data.users);
+						$('#post').html(data.posts);
                     }
                 });
 			}
+			
 			$.ajaxSetup({
  			 headers: {
   			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
