@@ -18,8 +18,8 @@ class ProfileController extends Controller
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
-        $cards =$user->creditcards;
-        return view('users.index',['user'=>$user,'cards'=>$cards]);        
+        // $cards =$user->creditcards;
+        return view('users.index',['user'=>$user]);        
     }  
 
     /**
@@ -31,8 +31,8 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $cards =$user->creditcards;
-        return view('users.update',['user'=>$user,'cards'=>$cards]);        
+        // $cards =$user->creditcards;
+        return view('users.update',['user'=>$user]);        
     }
 
     /**
@@ -48,8 +48,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $hashedPassword = $user->password;
         $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->type = $request->input('type');
+        $user->is_admin = $request->input('is_admin');
         if(Hash::check($request->input('password'),$hashedPassword)!=true)
         {
             if(($request->input('password'))==($request->input('password-confirm')))
@@ -60,7 +59,7 @@ class ProfileController extends Controller
             }
         }
         $user->save();
-        return redirect()->away(url()->current().'/edit');
+        return redirect('user');
     }
 
 }
