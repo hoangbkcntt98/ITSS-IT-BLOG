@@ -21,3 +21,4 @@ Auth::routes();
 Route::get('/search', 'ProfileController@search')->name('search');
 Route::delete('/del_user', 'ProfileController@destroy')->name('del_user');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
