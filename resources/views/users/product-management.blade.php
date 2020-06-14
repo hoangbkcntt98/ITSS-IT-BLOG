@@ -35,7 +35,8 @@
 								<h5>{{$pro->price}}</h5>
 							</td>
 							<td class="cart_description">
-								<button class = "btn btn-danger btn-sm" value = "D" id = "del_pro" onclick = "del_pro({{$pro->id}})"><span class="glyphicon glyphicon-trash"></span></button>
+
+								<input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_pro" onclick = "del_pro({{$pro->id}})">
 								<input type = "button" class = "btn btn-success btn-sm" value = "Detail" id = "view_pro" onclick = "view_pro({{$pro->id}})">
 							</td>
 						</tr>
@@ -43,7 +44,7 @@
 						@endif
 					</tbody>
 				</table>
-			</div>               
+			</div>
 </div><!--/tab-pane-->
 <script type="text/javascript">
              $('#pro_search').on('keyup',function(){
@@ -53,7 +54,7 @@
                     type: 'get',
                     url: '{{  url('pro_search') }}',
                     data: {
-						
+
                         'search': $value
                     },
                     success:function(data){
@@ -68,7 +69,7 @@
                     type: 'delete',
                     url: '{{  url('del_pro') }}',
                     data: ({
-						_token : $('meta[name="csrf-token"]').attr('content'), 
+						_token : $('meta[name="csrf-token"]').attr('content'),
                         'id':id
                     }),
                     success:function(data){
@@ -76,7 +77,7 @@
                     }
                 });
 				}
-				
+
 			}
 			function view_pro(id){
 				window.open('product-details/'.concat(id),'popup',200,300);
@@ -86,5 +87,5 @@
   			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
  				}
 			});
-			
+
 </script>

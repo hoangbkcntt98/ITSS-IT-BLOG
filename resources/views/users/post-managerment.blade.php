@@ -37,24 +37,24 @@
 							<td class="cart_description">
 								<button class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_post({{$post->id}})"><span class="glyphicon glyphicon-trash"></span></button>
 							</td>
-							
+
 						</tr>
                         @endforeach
 						@endif
 					</tbody>
 				</table>
-			</div>               
+			</div>
 </div><!--/tab-pane-->
 <script type="text/javascript">
              $('#post_search').on('keyup',function(){
-				
+
                 $value = $(this).val();
 				console.log($value);
                 $.ajax({
                     type: 'get',
                     url: '{{  url('post_search') }}',
                     data: {
-						
+
                         'search': $value
                     },
                     success:function(data){
@@ -70,20 +70,21 @@
                     type: 'delete',
                     url: '{{  url('del_post') }}',
                     data: ({
-						_token : $('meta[name="csrf-token"]').attr('content'), 
+						_token : $('meta[name="csrf-token"]').attr('content'),
                         'id':id
                     }),
                     success:function(data){
 						$('#post').html(data);
                     }
-                	});
+
+                });
 				}
-				
+
 			}
 			$.ajaxSetup({
  			 headers: {
   			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
  				}
 			});
-			
+
 </script>
