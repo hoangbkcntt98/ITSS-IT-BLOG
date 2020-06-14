@@ -81,7 +81,7 @@ class ProfileController extends Controller
                     }else
                     {
                         $role = "User";
-                        $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")' \>";
+                        $delete_button = "<button type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                     }
                     $output .= "<tr>
                     <td class='cart_description'><h5>" . $user->name . "</h5></td>
@@ -127,22 +127,19 @@ class ProfileController extends Controller
             $products = DB::table('product')->where([['product_name', 'LIKE', '%' . $request->search . '%']])->get();
             $output_pro = "";
             if ($products) {
-                $output_pro = "1";
                 foreach ($products as $pro) {
-                    $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_pro(".$pro->id.")' \>";
+                    $delete_button = " <button class = 'btn btn-danger btn-sm' value = '' id = 'del_pro' onclick = 'del_pro(".$pro->id."'><span class='glyphicon glyphicon-trash'></span></button>";
+                    $detail_button = " <input type = 'button' class = 'btn btn-success btn-sm' value = 'Detail' id = 'del_user' onclick = 'view_pro(".$pro->id.")' \>";
                     $output_pro .= "<tr>
                     <td class='cart_description'><h5>" . $pro->product_name . "</h5></td>
                     <td class='cart_description'><h5>" . $pro->CPU. "</h5></td>
                     <td class='cart_description'><h5>" . $pro->RAM. "</h5></td>
                     <td class='cart_description'><h5>" . $pro->OS . "</h5></td>
                     <td class='cart_description'><h5>" . $pro->price . "</h5></td>
-                    <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                    <td class='cart_description'>" . $delete_button . $detail_button. "</td>
                     </tr>";
                 }
-            }else{
-                $output_pro = "w";
             }
-            
             return Response($output_pro);
         }
     }
@@ -161,7 +158,7 @@ class ProfileController extends Controller
         $output = '';
         $delete_button="";
         $users = User::all();
-        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->get();
+        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->select('name', 'article.id','product_name','article.created_at','article.updated_at','article.title')->get();
         if ($users) {
             foreach ($users as $user) {
                 $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
@@ -171,7 +168,7 @@ class ProfileController extends Controller
                 }else
                 {
                     $role = "User";
-                    $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")' \>";
+                    $delete_button = "<button type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                 }
                 $output .= "<tr>
                 <td class='cart_description'><h5>" . $user->name . "</h5></td>
@@ -188,7 +185,7 @@ class ProfileController extends Controller
             foreach ($posts as $post) {
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
-                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
@@ -205,13 +202,13 @@ class ProfileController extends Controller
     public function destroy_post(Request $request)
     {
         $posts_del =DB::table('article')->where('id','=',$request->id)->delete();
-        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->get();
+        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->select('name', 'article.id','product_name','article.created_at','article.updated_at','article.title')->get();
         $output_post = "";
         if ($posts) {
             foreach ($posts as $post) {
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
-                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
@@ -231,17 +228,18 @@ class ProfileController extends Controller
         $output_pro = "";
         if ($products) {
             foreach ($products as $pro) {
-                $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_pro(".$pro->id.")' \>";
+                $delete_button = " <button class = 'btn btn-danger btn-sm' value = '' id = 'del_pro' onclick = 'del_pro(".$pro->id."'><span class='glyphicon glyphicon-trash'></span></button>";
+                $detail_button = " <input type = 'button' class = 'btn btn-success btn-sm' value = 'Detail' id = 'del_user' onclick = 'view_pro(".$pro->id.")' \>";
                 $output_pro .= "<tr>
                 <td class='cart_description'><h5>" . $pro->product_name . "</h5></td>
                 <td class='cart_description'><h5>" . $pro->CPU. "</h5></td>
                 <td class='cart_description'><h5>" . $pro->RAM. "</h5></td>
                 <td class='cart_description'><h5>" . $pro->OS . "</h5></td>
                 <td class='cart_description'><h5>" . $pro->price . "</h5></td>
-                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                <td class='cart_description'>" . $delete_button . $detail_button. "</td>
                 </tr>";
             }
-        }    
+        }
         return Response($output_pro);
     }
 }

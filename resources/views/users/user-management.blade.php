@@ -40,7 +40,7 @@
 							</td>
                             <td>
                                 @if($us->is_admin==0)
-								 <input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_user({{$us->id}})">
+								 <button type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_user({{$us->id}})"><span class="glyphicon glyphicon-trash"></span></button>
                            		 
                                 @endif
 							</td>

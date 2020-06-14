@@ -35,7 +35,7 @@
 								<h5>{{ \Carbon\Carbon::parse($post->updated_at)->format('d/m/Y g:i A')}}</h5>
 							</td>
 							<td class="cart_description">
-								<input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_post({{$post->id}})">
+								<button class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_post({{$post->id}})"><span class="glyphicon glyphicon-trash"></span></button>
 							</td>
 							
 						</tr>
@@ -76,7 +76,7 @@
                     success:function(data){
 						$('#post').html(data);
                     }
-                });
+                	});
 				}
 				
 			}
