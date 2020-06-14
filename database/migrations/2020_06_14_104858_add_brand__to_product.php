@@ -14,6 +14,7 @@ class AddBrandToProduct extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
+
             $table->string('brand_id')->references('id')->on('brand')->onDelete('cascade');
             $table->string('category_id')->references('id')->on('category')->onDelete('cascade');
         });
