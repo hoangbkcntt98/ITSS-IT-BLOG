@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\User;
 use App\Article;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -15,14 +16,14 @@ class ArticleController extends Controller
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
 
-    public function comment($request){
+    public function comment(Request $request){
         $new_comment = new Comment();
 
-        $new_comment->content = "hohohha";
+        $new_comment->content = $request->text;
         $new_comment->article_id = 1;
         $new_comment->user_id = 1;
         $new_comment->published_at = "2020/07/14";
-        $new_comment->user_name = User::where('id',$new_comment->user_id)->get('name');
+        $new_comment->user_name = User::where('id',$new_comment->user_id)->first()->name;
 
         $new_comment->save();
         return redirect()->back();

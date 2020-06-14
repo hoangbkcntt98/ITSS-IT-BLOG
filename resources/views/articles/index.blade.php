@@ -31,7 +31,7 @@
                         <p>Add a comment</p>
                         <form method="post">
                             @csrf
-                            <input type="text" name="content"/>
+                            <input type="text" name="text"/>
                             <input type="submit" class="btn btn-success"/>
                         </form>
                     </div>
