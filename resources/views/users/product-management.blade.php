@@ -35,8 +35,7 @@
 								<h5>{{$pro->price}}</h5>
 							</td>
 							<td class="cart_description">
-
-								<input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_pro" onclick = "del_pro({{$pro->id}})">
+								<button class = "btn btn-danger btn-sm" value = "D" id = "del_pro" onclick = "del_pro({{$pro->id}})"><span class="glyphicon glyphicon-trash"></span></button>
 								<input type = "button" class = "btn btn-success btn-sm" value = "Detail" id = "view_pro" onclick = "view_pro({{$pro->id}})">
 							</td>
 						</tr>
