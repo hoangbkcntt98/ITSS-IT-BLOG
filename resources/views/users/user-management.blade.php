@@ -68,19 +68,22 @@
                 });
             });
 			function del_user(id){
-				console.log(id);
-				$.ajax({
-                    type: 'delete',
-                    url: '{{  url('del_user') }}',
-                    data: ({
-						_token : $('meta[name="csrf-token"]').attr('content'), 
-                        'id':id
-                    }),
-                    success:function(data){
-                        $('#user').html(data.users);
-						$('#post').html(data.posts);
-                    }
-                });
+               var result = confirm("Are you sure to delete this user?");
+                if(result)  {
+                    $.ajax({
+                        type: 'delete',
+                        url: '{{  url('del_user') }}',
+                        data: ({
+                            _token : $('meta[name="csrf-token"]').attr('content'), 
+                            'id':id
+                        }),
+                        success:function(data){
+                            $('#user').html(data.users);
+                            $('#post').html(data.posts);
+                        }
+                    });
+              }
+				
 			}
 			
 			$.ajaxSetup({

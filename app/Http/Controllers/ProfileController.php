@@ -53,6 +53,7 @@ class ProfileController extends Controller
         $hashedPassword = $user->password;
         $user->name = $request->input('name');
         $user->is_admin = $request->input('is_admin');
+        $user->phone = $request->input('phone');
         if(Hash::check($request->input('password'),$hashedPassword)!=true)
         {
             if(($request->input('password'))==($request->input('password-confirm')))

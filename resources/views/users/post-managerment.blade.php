@@ -64,7 +64,9 @@
             });
 			function del_post(id){
 				console.log(id);
-				$.ajax({
+				var result = confirm("Are you sure to delete this post?");
+				if(result){
+					$.ajax({
                     type: 'delete',
                     url: '{{  url('del_post') }}',
                     data: ({
@@ -75,6 +77,8 @@
 						$('#post').html(data);
                     }
                 });
+				}
+				
 			}
 			$.ajaxSetup({
  			 headers: {

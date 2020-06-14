@@ -35,9 +35,9 @@
 								<h5>{{$pro->price}}</h5>
 							</td>
 							<td class="cart_description">
-								<input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_pro({{$pro->id}})">
+								<input type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_pro" onclick = "del_pro({{$pro->id}})">
+								<input type = "button" class = "btn btn-success btn-sm" value = "Detail" id = "view_pro" onclick = "view_pro({{$pro->id}})">
 							</td>
-							
 						</tr>
                         @endforeach
 						@endif
@@ -47,7 +47,6 @@
 </div><!--/tab-pane-->
 <script type="text/javascript">
              $('#pro_search').on('keyup',function(){
-				
                 $value = $(this).val();
 				console.log($value);
                 $.ajax({
@@ -63,8 +62,9 @@
                 });
             });
 			function del_pro(id){
-				console.log(id);
-				$.ajax({
+				var result = confirm("Are you sure to delete this product?");
+				if(result){
+					$.ajax({
                     type: 'delete',
                     url: '{{  url('del_pro') }}',
                     data: ({
@@ -75,6 +75,11 @@
 						$('#product').html(data);
                     }
                 });
+				}
+				
+			}
+			function view_pro(id){
+				window.open('product-details/'.concat(id),'popup',200,300);
 			}
 			$.ajaxSetup({
  			 headers: {
