@@ -24,6 +24,7 @@ class ListController extends Controller
             ->disk($request)
             ->size($request);
         $products =  $product->paginate(12);
+
         return view('list.index', ['products' => $products]);
     }
 
