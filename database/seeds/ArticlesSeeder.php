@@ -19,7 +19,7 @@ class ArticlesSeeder extends Seeder
         $users = User::all()->pluck('id')->toArray();
         $products = Product::findAll()->pluck('id')->toArray();
         for($i = 0; $i < $articles_count; $i++){
-            DB::table('article')->insert([
+            DB::table('articles')->insert([
                 'user_id' => $fake->randomElement($users),
                 'product_id' => $fake->randomElement($products),
                 'title' => $fake->text(20),
