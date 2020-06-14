@@ -16,7 +16,7 @@ class ProductDetailsSeeder extends Seeder
 
         for($i = 0; $i < $products_count; $i++){
             DB::table('product')->insert([
-                'name' => $fake->name,
+                'product_name' => $fake->name,
                 'image' => $fake->unique()->imageUrl(),
                 'CPU' => $fake->text(20),
                 'RAM' => $fake->text(20),

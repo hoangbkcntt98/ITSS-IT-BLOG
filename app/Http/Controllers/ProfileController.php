@@ -229,7 +229,6 @@ class ProfileController extends Controller
         $products = DB::table('product')->get();
         $output_pro = "";
         if ($products) {
-            $output_pro = "1";
             foreach ($products as $pro) {
                 $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_pro(".$pro->id.")' \>";
                 $output_pro .= "<tr>

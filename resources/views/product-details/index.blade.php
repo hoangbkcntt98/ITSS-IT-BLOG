@@ -52,7 +52,7 @@
             <div class="col-sm-7">
                 <div class="product-information"><!--/product-information-->
                     <img src="../../../public/layouts/images/product-details/new.jpg" class="newarrival" alt=""/>
-                    <h2>{{$product->name}}</h2>
+                    <h2>{{$product->product_name}}</h2>
                     <img src="../../../public/layouts/images/product-details/rating.png" alt=""/>
                     <span>
                         <span>Price: ${{$product->price}}</span>
