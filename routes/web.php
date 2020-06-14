@@ -30,6 +30,7 @@ Route::get('/list', 'ListController@index')->name('list');
 Route::get('/search', 'ListController@search')->name('search');
 Route::get('/filter', 'ListController@filter')->name('filter');
 
+
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
 Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
 
