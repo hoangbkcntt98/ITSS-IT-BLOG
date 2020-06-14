@@ -77,7 +77,6 @@
                     }
                 });
 				}
-
 			}
 			function view_pro(id){
 				window.open('product-details/'.concat(id),'popup',200,300);
