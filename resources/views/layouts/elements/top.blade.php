@@ -132,7 +132,9 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="{{route('search')}}" method="GET" class="search-form">
+								<input type="text" name="query" id="query" class="search-box" placeholder="Search"/>
+							</form>
 						</div>
 					</div>
 				</div>

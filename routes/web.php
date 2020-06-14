@@ -27,5 +27,7 @@ Route::delete('/del_pro', 'ProfileController@destroy_pro')->name('del_pro');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/list', 'ListController@index')->name('list');
+Route::get('/search', 'ListController@search')->name('search');
+
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
 Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
