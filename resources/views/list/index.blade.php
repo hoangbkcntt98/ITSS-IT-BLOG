@@ -1,4 +1,4 @@
-@extends('layouts.product-details-layout')
+@extends('layouts.master')
 
 @section('content')
 
@@ -16,23 +16,14 @@
             </div>
         @endif
 
-        <div class="jumbotron text-center clearfix">
-            <h2>Laravel Shopping Cart Example</h2>
-            <p>An example Laravel App that demos the basic functionality of a typical e-commerce shopping cart.</p>
-            <p>
-                <a href="http://andremadarang.com/implementing-a-shopping-cart-in-laravel/" class="btn btn-primary btn-lg" target="_blank">Blog Post</a>
-                <a href="https://github.com/drehimself/laravel-shopping-cart-example" class="btn btn-success btn-lg" target="_blank">GitHub Repo</a>
-            </p>
-        </div> <!-- end jumbotron -->
-
-        @foreach ($products->chunk(4) as $items)
+        @foreach ($products->chunk(3) as $items)
             <div class="row">
                 @foreach ($items as $product)
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <div class="caption text-center">
-                                <a href="{{ url('product-details', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
-                                <a href="{{ url('product-details', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
+                                <a href="{{ url('product-details', [$product->id]) }}"><img src="{{$product->image}}" alt="product" class="img-responsive"></a>
+                                <a href="{{ url('product-details', [$product->id]) }}"><h3>{{ $product->product_name }}</h3>
                                 <p>{{ $product->price }}</p>
                                 </a>
                             </div> <!-- end caption -->
@@ -41,6 +32,7 @@
                 @endforeach
             </div> <!-- end row -->
         @endforeach
+        {{$products->render()}}
 
     </div> <!-- end container -->
 

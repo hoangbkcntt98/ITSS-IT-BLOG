@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\DB;
 class ListController extends Controller
 {
     public function index()
     {
-        $products = Product::findAll();
-        return view('list', ['products'=>$products]);
+        $products = DB::table('product')->paginate(9);
+        return view('list.index', ['products'=>$products]);
     }
 }
