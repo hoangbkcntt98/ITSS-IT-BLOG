@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductDetailsController extends Controller {
     public function index(){
-        $product_first = DB::table('product')->get();
+        $product_first = DB::table('products')->get();
         $product_article = Product::getArticlesProduct($product_first->get(0)->id);
         $users = User::all();
         return view('product-details.index', ['products'=>$product_first, 'articles'=>$product_article, 'users'=>$users]);

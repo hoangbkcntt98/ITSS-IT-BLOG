@@ -64,9 +64,9 @@ $(document).ready(function() {
     	<div class="col-sm-9" style = "padding-top:5%;">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Information</a></li>
+                <li><a data-toggle="tab" href="#post-manager">Articles</a></li>
                 @if($user->is_admin==1)
                 <li><a data-toggle="tab" href="#user-manager">Users</a></li>
-                <li><a data-toggle="tab" href="#post-manager">Articles</a></li>
                 <li><a data-toggle="tab" href="#product-manager">Products</a></li>
 
                 @endif
