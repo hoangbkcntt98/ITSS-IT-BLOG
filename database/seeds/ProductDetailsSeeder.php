@@ -16,7 +16,7 @@ class ProductDetailsSeeder extends Seeder
         $brands = DB::table('brand')->get()->pluck('id')->toArray();
         $categories = DB::table('category')->get()->pluck('id')->toArray();
         for($i = 0; $i < $products_count; $i++){
-            DB::table('product')->insert([
+            DB::table('products')->insert([
                 'product_name' => $fake->name,
                 'image' => $fake->unique()->imageUrl(),
                 'CPU' => $fake->text(20),

@@ -37,7 +37,11 @@
 				
 					@include("layouts.elements.sidebar")
 				</div>
+				
+			
 				<div class="col-sm-9 padding-right">
+					@include("layouts.elements.filterbar")
+
 					@yield('content')
 				</div>
 			</div>

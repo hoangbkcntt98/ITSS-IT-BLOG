@@ -12,7 +12,7 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     protected function findProductById($id) {
-        return DB::table('product')->where('id', $id)->get();
+        return DB::table('products')->where('id', $id)->get();
     }
 
     /**
@@ -20,17 +20,17 @@ class Product extends Model {
      * @param $product_id
      */
     protected function getArticlesProduct($product_id){
-        return DB::table('article')->where('product_id', $product_id)->get();
+        return DB::table('articles')->where('product_id', $product_id)->get();
     }
 
     protected function findAll(){
-        return DB::table('product')->get();
+        return DB::table('products')->get();
     }
 
-    public function scopeName($query, $request)
+    public function scopeBrand_Id($query, $request)
     {
-        if ($request->has('product_name')) {
-            $query->where('product_name', 'LIKE', '%' . $request->product_name . '%');
+        if ($request->has('brand_id')) {
+            $query->where('brand_id', $request->brand_id);
         }
 
         return $query;
@@ -39,7 +39,7 @@ class Product extends Model {
     public function scopeCpu($query, $request)
     {
         if ($request->has('cpu')) {
-            $query->where('cpu', $request->cpu);
+            $query->where('cpu', 'like', '%' . $request->cpu . '%');
         }
 
         return $query;
@@ -48,16 +48,25 @@ class Product extends Model {
     public function scopeRam($query, $request)
     {
         if ($request->has('ram')) {
-            $query->where('ram', $request->ram);
+            $query->where('ram', 'like', '%' . $request->ram . '%');
         }
 
         return $query;
     }
 
-    public function scopePrice($query, $request)
+    public function scopeDisk($query, $request)
     {
-        if ($request->has('price')) {
-            $query->where('price', $request->price);
+        if ($request->has('disk')) {
+            $query->where('disk', 'like', '%' . $request->disk . '%');
+        }
+
+        return $query;
+    }
+
+    public function scopeSize($query, $request)
+    {
+        if ($request->has('size')) {
+            $query->where('size', 'like', '%' . $request->size . '%');
         }
 
         return $query;
