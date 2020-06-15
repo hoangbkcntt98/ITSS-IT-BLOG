@@ -2,13 +2,13 @@
     <div class="col">
         <label for="brand_id">Hãng:</label>
         <select name="brand_id" id="brand_id">
-            <option value="0">Acer</option>
-            <option value="3">Apple</option>
-            <option value="1">Asus</option>
-            <option value="2">Dell</option>
+            <option value="1">ACER</option>
+            <option value="2">APPLE</option>
+            <option value="3">ASUS</option>
+            <option value="4">DELL</option>
 
-            <option value="4">HP</option>
-            <option value="5">Lenovo</option>
+            <option value="5">HP</option>
+            <option value="6">LENOVO</option>
         </select>
     </div>
 

@@ -12,7 +12,7 @@ class BrandSeeder extends Seeder
     public function run()
     {
         $brands = [
-            ['name'=>'ASUS'],['name'=>'DELL'],['name'=>'APPLE'],['name'=>'HP'],['name'=>'LENOVO']
+            ['name'=>'ACER'],['name'=>'APPLE'],['name'=>'ASUS'],['name'=>'DELL'],['name'=>'HP'],['name'=>'LENOVO']
         ];
         foreach ($brands as $brand) {
             DB::table('brand')->insert($brand);

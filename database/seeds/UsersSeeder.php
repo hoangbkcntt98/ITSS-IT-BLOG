@@ -20,7 +20,7 @@ class UsersSeeder extends Seeder
                 'email' => $fake->unique()->email,
                 'password' => $fake->text(255),
                 'phone' => $fake->phoneNumber,
-                'about' => $fake->text(255),
+                // 'about' => $fake->text(255),
                 'is_admin' => $fake->boolean,
                 'remember_token' => $fake->text(100),
                 'created_at' => $fake->dateTime,

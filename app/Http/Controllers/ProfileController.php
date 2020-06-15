@@ -104,8 +104,8 @@ class ProfileController extends Controller
                     <td class='cart_description'><h5>" . $update . "</h5></td>
                     <td class='cart_description'><h5>" . $user->phone . "</h5></td>
                     <td class='cart_description'><h5>" . $role . "</h5></td>
-                    <td class='cart_description'>" . $delete_button . "</td>
-                    <td class='cart_description'>" . $detail_button . "</td>
+                    <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                    <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                     </tr>";
                 }
             }
@@ -203,8 +203,8 @@ class ProfileController extends Controller
                 <td class='cart_description'><h5>" . $update . "</h5></td>
                 <td class='cart_description'><h5>" . $user->phone . "</h5></td>
                 <td class='cart_description'><h5>" . $role . "</h5></td>
-                <td class='cart_description'>" . $delete_button . "</td>
-                <td class='cart_description'>" . $detail_button . "</td>
+                <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                 </tr>";
             }
         }

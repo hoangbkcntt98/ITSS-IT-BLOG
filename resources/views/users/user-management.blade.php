@@ -38,13 +38,13 @@
                                     @endif
                                 </a>
 							</td>
-                            <td class="cart_description" >
+                            <td class="cart_description" style = "border-right:none;padding-right:1px">
                                 @if($us->is_admin==0)
 								 <button  type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_user({{$us->id}})"><span class="glyphicon glyphicon-trash"></span></button>
                                  
                                 @endif
 							</td>
-                            <td class="cart_description">
+                            <td class="cart_description" style = "border-left:none;padding-left:0px;">
                             @if($us->is_admin==0)
                                 <input type = "button" class = "btn btn-success btn-sm" value = "Detail" id = "view_pro" onclick = "view_user({{$us->id}})">
                             @endif
