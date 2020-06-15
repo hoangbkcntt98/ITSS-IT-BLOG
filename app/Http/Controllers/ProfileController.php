@@ -11,6 +11,16 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class ProfileController extends Controller
 {
+    public function show($id){
+        $user = User::findOrFail($id);
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
+        if($user->is_admin == 0){
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
+        }
+        $users = User::all();
+        $product = DB::table('products')->get();
+        return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts,'products'=>$product]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -66,7 +76,7 @@ class ProfileController extends Controller
             }
         }
         $user->save();
-        return redirect('user');
+        return redirect('user/'.$id);
     }
     public function search(Request $request)
     {
@@ -78,11 +88,13 @@ class ProfileController extends Controller
                 foreach ($users as $user) {
                     $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
                     $delete_button="";
+                    $detail_button ="";
                     if($user->is_admin==1){
                         $role = "Admin";
                     }else
                     {
                         $role = "User";
+                        $detail_button = "<input  type = 'button' class = 'btn btn-success btn-sm' value = 'Detail' id = 'view_pro' onclick = 'view_user(".$user->id.")'>";
                         $delete_button = "<button type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                     }
                     $output .= "<tr>
@@ -91,7 +103,8 @@ class ProfileController extends Controller
                     <td class='cart_description'><h5>" . $update . "</h5></td>
                     <td class='cart_description'><h5>" . $user->phone . "</h5></td>
                     <td class='cart_description'><h5>" . $role . "</h5></td>
-                    <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                    <td class='cart_description'>" . $delete_button . "</td>
+                    <td class='cart_description'>" . $detail_button . "</td>
                     </tr>";
                 }
             }
@@ -172,11 +185,13 @@ class ProfileController extends Controller
             foreach ($users as $user) {
                 $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
                 $delete_button="";
+                $detail_button ="";
                 if($user->is_admin==1){
                     $role = "Admin";
                 }else
                 {
                     $role = "User";
+                    $detail_button = "<input  type = 'button' class = 'btn btn-success btn-sm' value = 'Detail' id = 'view_pro' onclick = 'view_user(".$user->id.")'>";
                     $delete_button = "<button type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_user(".$user->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                 }
                 $output .= "<tr>
@@ -185,7 +200,8 @@ class ProfileController extends Controller
                 <td class='cart_description'><h5>" . $update . "</h5></td>
                 <td class='cart_description'><h5>" . $user->phone . "</h5></td>
                 <td class='cart_description'><h5>" . $role . "</h5></td>
-                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                <td class='cart_description'>" . $delete_button . "</td>
+                <td class='cart_description'>" . $detail_button . "</td>
                 </tr>";
             }
         }

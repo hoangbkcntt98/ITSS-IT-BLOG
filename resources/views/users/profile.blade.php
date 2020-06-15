@@ -99,6 +99,11 @@ $(document).ready(function() {
                               <label for="password"><h4>Account Type</h4></label>
                               {{Form::select('is_admin', [1 => 'Admin', 0 =>'User'], $user->is_admin)}}
                           </div>
+                          @else
+                          <div class="col-xs-6">
+                              <label for="password"><h4>Account Type</h4></label>
+                              {{Form::select('is_admin', [0 =>'User'], $user->is_admin)}}
+                          </div>
                           @endif
                       </div>
                       <div class="form-group">
