@@ -113,7 +113,7 @@
 								<li><a href="index.html" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
+                                        <li><a href="/list">Products</a></li>
 										<li><a href="/product-details">Product Details</a></li>
 										<li><a href="checkout.html">Checkout</a></li>
 										<li><a href="cart.html">Cart</a></li>
@@ -132,7 +132,9 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="{{route('search')}}" method="GET" class="search-form">
+								<input type="text" name="query" id="query" class="search-box" placeholder="Search"/>
+							</form>
 						</div>
 					</div>
 				</div>
