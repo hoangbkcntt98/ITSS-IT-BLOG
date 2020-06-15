@@ -78,7 +78,6 @@
                     }
                 	});
 				}
-
 			}
 			$.ajaxSetup({
  			 headers: {
