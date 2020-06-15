@@ -39,6 +39,7 @@
                         <h3>No result!!!</h3>
                     </div>
         @endif
+
     </div> <!-- end container -->
 
 @endsection

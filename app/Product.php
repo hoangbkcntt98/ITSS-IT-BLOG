@@ -72,10 +72,10 @@ class Product extends Model {
         return $query;
     }
 
-    public function scopeName($query, $request)
+    public function scopeBrand_Id($query, $request)
     {
-        if ($request->has('product_name')) {
-            $query->where('product_name', 'LIKE', '%' . $request->product_name . '%');
+        if ($request->has('brand_id')) {
+            $query->where('brand_id', 'like', '%' . $request->brand . '%');
         }
 
         return $query;
@@ -84,7 +84,7 @@ class Product extends Model {
     public function scopeCpu($query, $request)
     {
         if ($request->has('cpu')) {
-            $query->where('cpu', $request->cpu);
+            $query->where('cpu', 'like', '%' . $request->cpu . '%');
         }
 
         return $query;
@@ -93,16 +93,25 @@ class Product extends Model {
     public function scopeRam($query, $request)
     {
         if ($request->has('ram')) {
-            $query->where('ram', $request->ram);
+            $query->where('ram', 'like', '%' . $request->ram . '%');
         }
 
         return $query;
     }
 
-    public function scopePrice($query, $request)
+    public function scopeDisk($query, $request)
     {
-        if ($request->has('price')) {
-            $query->where('price', $request->price);
+        if ($request->has('disk')) {
+            $query->where('disk', 'like', '%' . $request->disk . '%');
+        }
+
+        return $query;
+    }
+
+    public function scopeSize($query, $request)
+    {
+        if ($request->has('size')) {
+            $query->where('size', 'like', '%' . $request->size . '%');
         }
 
         return $query;
