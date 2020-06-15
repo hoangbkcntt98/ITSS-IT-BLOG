@@ -7,32 +7,43 @@
                 <div class="card">
                     <div class="card-header">{{$article->title}}</div>
                     <div class="card-body">
-                        <p>Author: {{$author->name}}</p>
-                        <p>Published at: {{$article->published_at}}</p>
-                        <br/>
                         <img src="../images/{{$article->image}}"
-                             style="
-                             display: block;
-                             margin-left: auto;
-                             margin-right: auto;
-                             width: 50%;"
+                             class="center_positioning"
                              alt="acerA515.jpg">
                         <br/>
-                        <p>{{$article->content}}</p>
+                        <div class="card">
+                            <div class="card-header" id="info">
+                                <p class="center_vertical">Author: {{$author->name}}
+                                    <br/>
+                                Published at: {{$article->published_at}}
+                                </p>
+                            </div>
+                            <div class="body">
+                                <p class="content">{{$article->content}}</p>
+                            </div>
+                        </div>
                         <br/>
                     </div>
                     <div class="card-footer">
-                        <p>Comments</p>
+                        <h4>Comments</h4>
                             @foreach($comments as $comment)
-                                <p>User: {{$comment->name}}</p>
-                                <p>{{$comment->content}}</p>
+                                <div class="card">
+                                    <div class="card-header" id="comment">
+                                        <p class="center_vertical">
+                                        User: {{$comment->name}}
+                                        </p>
+                                    </div>
+                                    <div class="body">
+                                        <p class="content">{{$comment->content}}</p>
+                                    </div>
+                                </div>
                                 <br/>
                             @endforeach
-                        <p>Add a comment</p>
+                        <h4>Add a comment</h4>
                         <form method="post">
                             @csrf
-                            <input type="text" name="text"/>
-                            <input type="submit" class="btn btn-success"/>
+                            <input type="text" placeholder="comment something ..."
+                                   name="text" class="input_comment"/>
                         </form>
                     </div>
                 </div>

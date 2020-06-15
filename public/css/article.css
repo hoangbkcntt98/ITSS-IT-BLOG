@@ -1,0 +1,33 @@
+.center_positioning {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.content {
+    padding: 10px 10px 10px 10px
+}
+
+#info {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
+}
+
+#comment{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: auto;
+    background: #1f6fb2;
+}
+
+.center_vertical{
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 50%;
+}
+
+.input_comment {
+    width: 100%;
+}
