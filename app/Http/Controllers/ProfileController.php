@@ -21,10 +21,13 @@ class ProfileController extends Controller
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
-        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('product','articles.product_id','=','product.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
-        $user_article = collect([]);
+
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        if($user->is_admin == 0){
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('product','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
+        }
         $users = User::all();
-        $product = DB::table('product')->get();
+        $product = DB::table('products')->get();
         return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts,'products'=>$product]);
     }
     /**
@@ -100,13 +103,17 @@ class ProfileController extends Controller
     public function post_search(Request $request)
     {
         if ($request->ajax()) {
-            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('product','articles.product_id','=','product.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
+
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
+            if($user->is_admin == 0){
+                $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
+            }
             $output_post = "";
             if ($posts) {
                 foreach ($posts as $post) {
                     $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                     $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
-                    $delete_button = " <input type = 'button' class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")' \>";
+                    $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
                     $output_post .= "<tr>
                     <td class='cart_description'><h5>" . $post->name . "</h5></td>
                     <td class='cart_description'><h5>" . $post->title . "</h5></td>
@@ -158,7 +165,10 @@ class ProfileController extends Controller
         $output = '';
         $delete_button="";
         $users = User::all();
-        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->select('name', 'article.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        if($user->is_admin == 0){
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
+        }
         if ($users) {
             foreach ($users as $user) {
                 $update= Carbon::parse($user->updated_at)->format('d/m/Y g:i A');
@@ -201,8 +211,12 @@ class ProfileController extends Controller
     }
     public function destroy_post(Request $request)
     {
-        $posts_del =DB::table('article')->where('id','=',$request->id)->delete();
-        $posts =  DB::table('article')->join('users','article.user_id','=','users.id')->join('product','article.product_id','=','product.id')->select('name', 'article.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        $user = Auth::user();
+        $posts_del =DB::table('articles')->where('id','=',$request->id)->delete();
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->get();
+        if($user->is_admin == 0){
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
+        }
         $output_post = "";
         if ($posts) {
             foreach ($posts as $post) {
@@ -223,8 +237,8 @@ class ProfileController extends Controller
     }
     public function destroy_pro(Request $request)
     {
-        $pro_del =DB::table('product')->where('id','=',$request->id)->delete();
-        $products = DB::table('product')->get();
+        $pro_del =DB::table('products')->where('id','=',$request->id)->delete();
+        $products = DB::table('products')->get();
         $output_pro = "";
         if ($products) {
             foreach ($products as $pro) {

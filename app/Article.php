@@ -18,7 +18,7 @@ class Article extends Model
      *
      * @var string
      */
-    protected $table = 'article';
+    protected $table = 'articles';
 
     protected $fillable = ['title', 'slug', 'description', 'content', 'published', 'published_at'];
 
