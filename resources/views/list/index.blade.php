@@ -16,23 +16,29 @@
             </div>
         @endif
 
-        @foreach ($products->chunk(3) as $items)
-            <div class="row">
-                @foreach ($items as $product)
-                    <div class="col-md-3">
-                        <div class="thumbnail">
-                            <div class="caption text-center">
-                                <a href="{{ url('product-details', [$product->id]) }}"><img src="{{$product->image}}" alt="product" class="img-responsive"></a>
-                                <a href="{{ url('product-details', [$product->id]) }}"><h3>{{ $product->product_name }}</h3>
-                                <p>{{ $product->price }}</p>
-                                </a>
-                            </div> <!-- end caption -->
-                        </div> <!-- end thumbnail -->
-                    </div> <!-- end col-md-3 -->
-                @endforeach
-            </div> <!-- end row -->
-        @endforeach
-        {{$products->render()}}
+        @if($products->count() > 0)
+            @foreach ($products->chunk(4) as $items)
+                <div class="row">
+                    @foreach ($items as $product)
+                        <div class="col-md-3">
+                            <div class="thumbnail">
+                                <div class="caption text-center">
+                                    <a href="{{ url('product-details', [$product->id]) }}"><img src="{{$product->image}}" alt="product" class="img-responsive"></a>
+                                    <a href="{{ url('product-details', [$product->id]) }}"><h3>{{ $product->product_name }}</h3>
+                                    <p>{{ $product->price }}</p>
+                                    </a>
+                                </div> <!-- end caption -->
+                            </div> <!-- end thumbnail -->
+                        </div> <!-- end col-md-3 -->
+                    @endforeach
+                </div> <!-- end row -->
+            @endforeach
+            {{$products->render()}}
+        @else
+                    <div class="text-center">
+                        <h3>No result!!!</h3>
+                    </div>
+        @endif
 
     </div> <!-- end container -->
 
