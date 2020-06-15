@@ -12,8 +12,8 @@ class ArticleController extends Controller
     public function index($id){
         $article = Article::where('id',$id)->first();
         $author = User::where('id',$article->user_id)->first();
-        $comments = DB::table('comment')->join('users','comment.user_id','=','users.id')
-            ->select('users.name', 'comment.content','comment.published_at')->get();
+        $comments = DB::table('comments')->join('users','comments.user_id','=','users.id')
+            ->select('users.name', 'comments.content','comments.published_at')->get();
 
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
