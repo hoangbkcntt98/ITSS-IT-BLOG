@@ -105,9 +105,9 @@ class ProfileController extends Controller
         if ($request->ajax()) {
 
             $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
-            if($user->is_admin == 0){
-                $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
-            }
+//            if($user->is_admin == 0){
+//                $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','article.created_at','article.updated_at','article.title')->where('articles.user_id','=',$user->id)->get();
+//            }
             $output_post = "";
             if ($posts) {
                 foreach ($posts as $post) {
