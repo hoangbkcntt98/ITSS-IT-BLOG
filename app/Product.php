@@ -76,6 +76,7 @@ class Product extends Model {
     {
         if ($request->has('brand_id')) {
             $query->where('brand_id', 'like', '%' . $request->brand . '%');
+
         }
 
         return $query;

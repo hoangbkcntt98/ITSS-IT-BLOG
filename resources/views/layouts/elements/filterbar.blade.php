@@ -1,7 +1,7 @@
 <form action="{{route('filter')}}" method="GET" class="row">
     <div class="col">
-        <label for="size">Hãng:</label>
-        <select name="brand" id="brand">
+        <label for="brand_id">Hãng:</label>
+        <select name="brand_id" id="brand_id">
             <option value="0">Acer</option>
             <option value="3">Apple</option>
             <option value="1">Asus</option>
@@ -13,7 +13,7 @@
 
 
     <div class="col">
-        <label for="size">CPU:</label>
+        <label for="cpu">CPU:</label>
         <select name="cpu" id="cpu">
             <option value="Core i3">Intel Core i3</option>
             <option value="Core i5">Intel Core i5</option>
