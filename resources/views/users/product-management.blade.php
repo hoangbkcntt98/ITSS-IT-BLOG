@@ -43,7 +43,7 @@
 						@endif
 					</tbody>
 				</table>
-			</div>               
+			</div>
 </div><!--/tab-pane-->
 <script type="text/javascript">
              $('#pro_search').on('keyup',function(){
@@ -53,7 +53,7 @@
                     type: 'get',
                     url: '{{  url('pro_search') }}',
                     data: {
-						
+
                         'search': $value
                     },
                     success:function(data){
@@ -68,7 +68,7 @@
                     type: 'delete',
                     url: '{{  url('del_pro') }}',
                     data: ({
-						_token : $('meta[name="csrf-token"]').attr('content'), 
+						_token : $('meta[name="csrf-token"]').attr('content'),
                         'id':id
                     }),
                     success:function(data){
@@ -76,7 +76,6 @@
                     }
                 });
 				}
-				
 			}
 			function view_pro(id){
 				window.open('product-details/'.concat(id),'popup',200,300);
@@ -86,5 +85,5 @@
   			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
  				}
 			});
-			
+
 </script>

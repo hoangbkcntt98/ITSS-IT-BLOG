@@ -32,3 +32,6 @@ Route::get('/filter', 'ListController@filter')->name('filter');
 
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
 Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
+
+Route::get('/articles/{id}', 'ArticleController@index')->name('show_article');
+Route::post('/articles/{id}','ArticleController@comment')->name('make_comment');

@@ -26,19 +26,20 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     
+
     public function index()
     {
         $id = Auth::id();
         $user = User::findOrFail($id);
+
         $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
         if($user->is_admin == 0){
             $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
         }
         $users = User::all();
         $product = DB::table('products')->get();
-        return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts,'products'=>$product]);        
-    }  
+        return view('users.index',['user'=>$user,'users'=>$users,'posts'=>$posts,'products'=>$product]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -48,7 +49,7 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('users.update',['user'=>$user]);        
+        return view('users.update',['user'=>$user]);
     }
 
     /**
@@ -60,7 +61,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $user = User::findOrFail($id);
         $hashedPassword = $user->password;
         $user->name = $request->input('name');
@@ -80,7 +81,7 @@ class ProfileController extends Controller
     }
     public function search(Request $request)
     {
-        $id = Auth::id(); 
+        $id = Auth::id();
         if ($request->ajax()) {
             $output = '';
             $users = DB::table('users')->where([['name', 'LIKE', '%' . $request->search . '%']])->get();
@@ -108,7 +109,7 @@ class ProfileController extends Controller
                     </tr>";
                 }
             }
-            
+
             return Response($output);
         }
     }
@@ -116,6 +117,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         if ($request->ajax()) {
+
             $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
             if($user->is_admin == 0){
                 $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%'],['articles.user_id','=',$user->id]])->get();
@@ -136,7 +138,7 @@ class ProfileController extends Controller
                     </tr>";
                 }
             }
-            
+
             return Response($output_post);
         }
     }
@@ -172,11 +174,12 @@ class ProfileController extends Controller
     {
        //$table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         $user = Auth::user();
-        $us = User::findOrFail($request->id); 
+        $us = User::findOrFail($request->id);
         $us->delete();
         $output = '';
         $delete_button="";
         $users = User::all();
+
         $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
         if($user->is_admin == 0){
             $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
@@ -221,13 +224,14 @@ class ProfileController extends Controller
                 </tr>";
             }
         }
-      
+
         return response()->json(['users' => $output, 'posts' => $output_post]);;
     }
     public function destroy_post(Request $request)
     {
         $user = Auth::user();
         $posts_del =DB::table('articles')->where('id','=',$request->id)->delete();
+
         $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
         if($user->is_admin == 0){
             $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();

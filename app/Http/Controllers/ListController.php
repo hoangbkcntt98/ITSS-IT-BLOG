@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Product;
+
 class ListController extends Controller
 {
     public function index()
@@ -23,6 +24,7 @@ class ListController extends Controller
             ->disk($request)
             ->size($request);
         $products =  $product->paginate(12);
+
         return view('list.index', ['products' => $products]);
     }
 
