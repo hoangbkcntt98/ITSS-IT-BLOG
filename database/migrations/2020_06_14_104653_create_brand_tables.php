@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUsernameToCommentTable extends Migration
+class CreateBrandTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddUsernameToCommentTable extends Migration
      */
     public function up()
     {
-        Schema::table('comment', function($table) {
-            $table->string('user_name');
+        Schema::create('brand', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddUsernameToCommentTable extends Migration
      */
     public function down()
     {
-        Schema::table('comment', function (Blueprint $table) {
-            $table->dropColumn('user_name');
-        });
+        Schema::dropIfExists('brand');
     }
 }

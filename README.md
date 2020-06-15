@@ -3,7 +3,7 @@
 - Tạo instance của tài khoản ( nếu xampp thì k cần).
 - Tạo 1 database tên là "database"
 - chạy php artisan migrate // Đoạn này ông nào dùng workbench bị lỗi thì chạy dòng sql này : ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password
-BY 'root';  
+BY 'nhập pass vào đây/ không có để trống';  
 - chạy npm install && npm run dev
 - php artisan serve
 - Cài đặt file .env: Thay đoạn này vào
@@ -18,4 +18,9 @@ DB_PASSWORD=
 # Cách tạo một view 
 - Các phần cơ bản của trang ( không thay đổi) t để trong views/layouts. à ông nào làm cái sidebar thì đổ vào cái sidebar trong này nhé.
 - Nhìn file resource/views/home.blade sửa theo ( tức là chỉ cần tạo cái secsion content giống thế xong nhét dữ liệu vào thôi  ).
+# Fake dữ liệu
+- composer dump-autoload
+- php artisan migrate:reset
+- php artisan migrate
+- php artisan db:seed
 # Happy Coding 

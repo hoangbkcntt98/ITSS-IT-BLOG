@@ -14,6 +14,7 @@
     <link href="{{ asset('layouts/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('layouts/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('layouts/css/responsive.css') }}" rel="stylesheet">
+	<link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ asset('layouts/images') }}/ico/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

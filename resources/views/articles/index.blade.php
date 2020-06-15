@@ -24,7 +24,7 @@
                     <div class="card-footer">
                         <p>Comments</p>
                             @foreach($comments as $comment)
-                                <p>User: {{$comment->user_name}}</p>
+                                <p>User: {{$comment->name}}</p>
                                 <p>{{$comment->content}}</p>
                                 <br/>
                             @endforeach

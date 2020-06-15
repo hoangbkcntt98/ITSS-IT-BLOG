@@ -5,14 +5,16 @@ use App\Comment;
 use App\User;
 use App\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
     public function index($id){
-//        $article = DB::table('article')->where('id',$id)->first();
         $article = Article::where('id',$id)->first();
         $author = User::where('id',$article->user_id)->first();
-        $comments = Comment::where('article_id',$id)->get();
+        $comments = DB::table('comment')->join('users','comment.user_id','=','users.id')
+            ->select('users.name', 'comment.content','comment.published_at')->get();
+
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
 
@@ -23,8 +25,6 @@ class ArticleController extends Controller
         $new_comment->article_id = 1;
         $new_comment->user_id = 1;
         $new_comment->published_at = "2020/07/14";
-        $new_comment->user_name = User::where('id',$new_comment->user_id)->first()->name;
-
         $new_comment->save();
         return redirect()->back();
     }

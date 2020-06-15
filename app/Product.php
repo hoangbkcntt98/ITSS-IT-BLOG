@@ -26,4 +26,40 @@ class Product extends Model {
     protected function findAll(){
         return DB::table('product')->get();
     }
+
+    public function scopeName($query, $request)
+    {
+        if ($request->has('product_name')) {
+            $query->where('product_name', 'LIKE', '%' . $request->product_name . '%');
+        }
+
+        return $query;
+    }
+
+    public function scopeCpu($query, $request)
+    {
+        if ($request->has('cpu')) {
+            $query->where('cpu', $request->cpu);
+        }
+
+        return $query;
+    }
+
+    public function scopeRam($query, $request)
+    {
+        if ($request->has('ram')) {
+            $query->where('ram', $request->ram);
+        }
+
+        return $query;
+    }
+
+    public function scopePrice($query, $request)
+    {
+        if ($request->has('price')) {
+            $query->where('price', $request->price);
+        }
+
+        return $query;
+    }
 }
