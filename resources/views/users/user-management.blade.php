@@ -57,7 +57,7 @@
 				console.log($value);
                 $.ajax({
                     type: 'get',
-                    url: '{{  url('search') }}',
+                    url: '{{  url('user_search') }}',
                     data: {
 						
                         'search': $value

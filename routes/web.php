@@ -18,7 +18,7 @@ Route::get('/', function () {
 })->name('/');
 Route::resource('user','ProfileController');
 Auth::routes();
-Route::get('/search', 'ProfileController@search')->name('search');
+Route::get('/user_search', 'ProfileController@search')->name('user_search');
 Route::delete('/del_user', 'ProfileController@destroy')->name('del_user');
 Route::get('/post_search', 'ProfileController@post_search')->name('post_search');
 Route::delete('/del_post', 'ProfileController@destroy_post')->name('del_post');
