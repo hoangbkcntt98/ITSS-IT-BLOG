@@ -20,7 +20,7 @@ class Product extends Model {
      * @param $product_id
      */
     protected function getArticlesProduct($product_id){
-        return DB::table('article')->where('product_id', $product_id)->get();
+        return DB::table('articles')->where('product_id', $product_id)->get();
     }
 
     protected function findAll(){
@@ -30,7 +30,7 @@ class Product extends Model {
     public function scopeBrand_Id($query, $request)
     {
         if ($request->has('brand_id')) {
-            $query->where('brand_id', 'like', '%' . $request->brand . '%');
+            $query->where('brand_id', $request->brand_id);
         }
 
         return $query;
