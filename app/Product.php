@@ -12,7 +12,7 @@ class Product extends Model {
      * @return \Illuminate\Support\Collection
      */
     protected function findProductById($id) {
-        return DB::table('products')->where('id', $id)->get();
+        return DB::table('products')->join('brand','products.brand_id','=','brand.id')->where('products.id', $id)->get();
     }
 
     /**

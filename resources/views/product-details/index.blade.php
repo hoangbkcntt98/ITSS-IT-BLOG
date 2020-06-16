@@ -57,6 +57,7 @@
                     <span>
                         <span>Price: ${{$product->price}}</span>
                     </span>
+                    <p><b>Brand:</b>{{$product->name}}</p>
                     <p><b>CPU:</b>{{$product->CPU}}</p>
                     <p><b>RAM:</b> {{$product->RAM}}</p>
                     <p><b>Disk:</b> {{$product->disk}}</p>
