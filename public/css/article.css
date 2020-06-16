@@ -31,3 +31,19 @@
 .input_comment {
     width: 100%;
 }
+
+.content {
+    height: 150px;
+}
+
+.preview_image{
+    width:50%;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.textarea_article{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-color: #1f6fb2;
+}

@@ -43,7 +43,8 @@
                         <form method="post">
                             @csrf
                             <input type="text" placeholder="comment something ..."
-                                   name="text" class="input_comment"/>
+                                   name="comment" class="input_comment"/>
+                            <input type="submit" id = "submitButton" value="Submit">
                         </form>
                     </div>
                 </div>
