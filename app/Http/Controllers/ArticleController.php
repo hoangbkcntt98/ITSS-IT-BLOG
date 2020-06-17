@@ -22,8 +22,8 @@ class ArticleController extends Controller
         $new_comment = new Comment();
 
         $new_comment->content = $request->text;
-        $new_comment->article_id = 1;
-        $new_comment->user_id = 1;
+        $new_comment->article_id = 2;
+        $new_comment->user_id = 8;
         $new_comment->published_at = "2020/07/14";
         $new_comment->save();
         return redirect()->back();

@@ -7,6 +7,7 @@
 @import url(http://fonts.googleapis.com/css?family=Abel);
 
 body {
+  width: 100%;
   font-family: 'Roboto', sans-serif;
   background:;
   position: relative;
@@ -262,10 +263,10 @@ a#scrollUp i{
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 155px;
+  width: 200px;
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
-  background-position: 130px;
+  background-position: 180px;
 }
 
 
@@ -1436,6 +1437,15 @@ h2.title {
   overflow: hidden;
 }
 
+.filter-form{
+  display: table;
+  width: 100%; /*Optional*/
+  table-layout: fixed; /*Optional*/
+  border-spacing: 10px; /*Optional*/
+}
+.filter-element{
+  display: table-cell;
+}
 .login-form {
 
 }
