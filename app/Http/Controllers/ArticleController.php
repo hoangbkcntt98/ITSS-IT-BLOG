@@ -6,16 +6,16 @@ use App\User;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 class ArticleController extends Controller
 {
     public function index($id){
-
-        $article = Article::where('id',$id)->first();
+        // $article = Article::where('id',$id)->first();
+        $article = DB::table('articles')->where('id',$id)->first();
         $author = User::where('id',$article->user_id)->first();
         $comments = Comment::where('article_id','=',$id)
             ->join('users','comments.user_id','=','users.id')
-            ->select( 'comments.content','comments.published_at')->get();
+            ->select( 'comments.content','comments.published_at','users.name')->get();
 
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
@@ -28,11 +28,12 @@ class ArticleController extends Controller
 
         $new_comment->article_id = $id;
         $new_comment->user_id = Auth::id();
-
         $new_comment->published_at = \Carbon\Carbon::now();
 
         $new_comment->save();
-        return redirect()->back();
+        // add user
+        $user = Auth::user();
+        return response()->json(array('html'=>view('articles.comment',['comment'=>$new_comment,'user'=>$user])->render()));
     }
 
     public function show_form($id){
