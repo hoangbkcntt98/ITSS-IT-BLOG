@@ -63,18 +63,18 @@ class ListController extends Controller
      {
       $query = $request->get('query');
       $data = DB::table('products')
-        ->where('product_id', 'LIKE', "%{$query}%")
+        ->where('product_name', 'LIKE', "%{$query}%")
+        ->limit('5')
         ->get();
-      $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+      $output = '<ul class="dropdown-menu suggest-list" style="display:block; position:absolute">';
       foreach($data as $row)
       {
        $output .= '
-       <li><a href="#">'.$row->country_name.'</a></li>
+       <li><a href="/product-details/'.$row->id.'"><img src="'.$row->image.'" alt="product">'.$row->product_name.'</a></li>
        ';
       }
       $output .= '</ul>';
-      echo $output;
+      return $output;
      }
     }
-
 }

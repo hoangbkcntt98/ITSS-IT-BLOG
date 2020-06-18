@@ -256,17 +256,17 @@ a#scrollUp i{
 .search_box input {
   background: #F0F0E9;
   border: medium none;
-  color: #B2B2B2;
+  color: rgb(0, 0, 0);
   font-family: 'roboto';
   font-size: 12px;
   font-weight: 300;
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 200px;
+  width: 300px;
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
-  background-position: 180px;
+  background-position: 280px;
 }
 
 
@@ -2564,4 +2564,14 @@ h2.title {
   color: #FE980F;
 }
 
+.suggest-list{
+  padding-left: 10px;
+  width: 300px;
+  left: 8px;
+}
 
+.suggest-list img{
+  height: 4rem;
+  width: 4rem;
+  padding-right: 2px;
+}
