@@ -60,6 +60,6 @@
 
         </select>
     </div>
-    <input type="submit" value="Search">
+    <input type="submit" value="Filter" class="filter-btn">
 
 </form>

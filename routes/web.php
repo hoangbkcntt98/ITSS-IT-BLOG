@@ -29,6 +29,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/list', 'ListController@index')->name('list');
 Route::get('/search', 'ListController@search')->name('search');
 Route::get('/filter', 'ListController@filter')->name('filter');
+Route::post('/search/autocomplete', 'ListController@auto_complete')->name('autocomplete');
 
 
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
