@@ -107,6 +107,7 @@
 						<div class="search_box pull-right">
 							<form action="{{route('search')}}" method="GET" class="search-form">
 								<input type="text" name="query" id="query" class="search-box" placeholder="Search"/>
+								<div id="suggesstion-box"></div>
 							</form>
 						</div>
 					</div>
