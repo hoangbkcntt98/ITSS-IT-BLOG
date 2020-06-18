@@ -65,7 +65,6 @@
                     comment: value
                 }),
                 success:function(data){
-                   alert(data.html);
                     $('#add-comment').append(data.html);
              },
             });
