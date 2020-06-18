@@ -17,7 +17,7 @@
         @endif
 
         @if($products->count() > 0)
-            @foreach ($products->chunk(4) as $items)
+            @foreach ($products->chunk(3) as $items)
                 <div class="row">
                     @foreach ($items as $product)
                         <div class="col-md-3">

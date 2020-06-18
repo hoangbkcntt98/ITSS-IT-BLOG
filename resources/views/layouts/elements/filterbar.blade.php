@@ -1,6 +1,6 @@
-<form action="{{route('filter')}}" method="GET" class="row">
-    <div class="col">
-        <label for="brand_id">Hãng:</label>
+<form action="{{route('filter')}}" method="GET" class="filter-form">
+    <div class="filter-element">
+        <label for="brand_id">Brand:</label>
         <select name="brand_id" id="brand_id">
             <option hidden selected></option>
             <option value="1">ACER</option>
@@ -13,7 +13,7 @@
     </div>
 
 
-    <div class="col">
+    <div class="filter-element">
         <label for="cpu">CPU:</label>
         <select name="cpu" id="cpu">
             <option hidden selected></option>
@@ -27,7 +27,7 @@
         </select>
     </div>
 
-    <div class="col">
+    <div class="filter-element">
         <label for="ram">RAM:</label>
         <select name="ram" id="ram">
             <option hidden selected></option>
@@ -38,8 +38,8 @@
         </select>
     </div>
 
-    <div class="col">
-        <label for="disk">Ổ cứng:</label>
+    <div class="filter-element">
+        <label for="disk">Disk:</label>
         <select name="disk" id="disk">
             <option hidden selected></option>
             <option value="128">128Gb</option>
@@ -48,8 +48,8 @@
         </select>
     </div>
 
-    <div class="col">
-        <label for="size">Màn hình:</label>
+    <div class="filter-element">
+        <label for="size">Screen size:</label>
         <select  name="size" id="size">
             <option hidden selected></option>
             <option value="12">Màn 12 Inch</option>

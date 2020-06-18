@@ -23,11 +23,13 @@ class ArticleController extends Controller
     public function comment(Request $request, $id){
         $new_comment = new Comment();
 
+
         $new_comment->content = $request->comment;
 
         $new_comment->article_id = $id;
         $new_comment->user_id = Auth::id();
         $new_comment->published_at = \Carbon\Carbon::now();
+
         $new_comment->save();
         // add user
         $user = Auth::user();
