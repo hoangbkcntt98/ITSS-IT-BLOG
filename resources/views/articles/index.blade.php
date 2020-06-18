@@ -24,10 +24,11 @@
                         </div>
                         <br/>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer" >
                         <h4>Comments</h4>
+                        <div id = "add-comment">
                             @foreach($comments as $comment)
-                                <div class="card">
+                                <div class="card" >
                                     <div class="card-header" id="comment">
                                         <p class="center_vertical">
                                         User: {{$comment->name}}
@@ -37,18 +38,47 @@
                                         <p class="content">{{$comment->content}}</p>
                                     </div>
                                 </div>
-                                <br/>
+                                </br>
                             @endforeach
+                        </div>
                         <h4>Add a comment</h4>
-                        <form method="post">
-                            @csrf
+                        <div class = "form-group">
                             <input type="text" placeholder="comment something ..."
-                                   name="comment" class="input_comment"/>
-                            <input type="submit" id = "submitButton" value="Submit">
-                        </form>
+                                   name="comment" id = "comment-content"/>
+                            <button id = "comment-button" class = "btn btn-primary btn-sm" >Comment</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<script>
+
+    $('#comment-button').click(function(){
+        var value = $('#comment-content').val();
+        if(value!=null){
+            $.ajax({
+            type: 'post',
+            url: '{{  url('articles/'.$article->id) }}',
+                data: ({
+                    _token : $('meta[name="csrf-token"]').attr('content'), 
+                    comment: value
+                }),
+                success:function(data){
+                   alert(data.html);
+                    $('#add-comment').append(data.html);
+             },
+            });
+        }else{
+            alert('Content of comment is empty')
+        }
+        
+    });
+   
+	$.ajaxSetup({
+ 		headers: {
+  			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+ 			}
+		});
+</script>
 @endsection
