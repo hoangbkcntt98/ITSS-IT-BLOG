@@ -33,7 +33,7 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
+				<div class="col-md-3">
 				
 					@include("layouts.elements.sidebar")
 				</div>

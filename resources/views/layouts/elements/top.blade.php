@@ -107,7 +107,7 @@
 						<div class="search_box pull-right">
 							<form action="{{route('search')}}" method="GET" class="search-form">
 								<input type="text" name="query" id="query" class="search-box" placeholder="Search"/>
-								<div id="suggesstion-box"></div>
+								<div id="suggestion-box"></div>
 							</form>
 						</div>
 					</div>
@@ -115,4 +115,32 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function () {
+	$('#query').keyup(function(){ 
+		var query = $(this).val();
+		if(query != '')
+		{
+			$.ajax({
+			url:"{{ route('autocomplete')}}",
+			method:"GET",
+			data:{'query':query},
+			success:function(data){
+				$('#suggestion-box').html(data);
+				}
+			});
+		}
+	});
+
+	$(document).on('click', 'li', function(){
+		var value = $(this).text();
+		// assign the value to the search box
+		$('#query').val(value);
+		// after click is done, search results segment is made empty
+		$('#suggestion-box').html("");
+	});
+
+ });
+</script>
