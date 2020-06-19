@@ -57,7 +57,6 @@
                     <span>
                         <span>Price: ${{$product->price}}</span>
                     </span>
-                    <p><b>Brand:</b>{{$product->name}}</p>
                     <p><b>CPU:</b>{{$product->CPU}}</p>
                     <p><b>RAM:</b> {{$product->RAM}}</p>
                     <p><b>Disk:</b> {{$product->disk}}</p>
@@ -66,6 +65,10 @@
                     <p><b>Size:</b> {{$product->size}}</p>
                     <p><i>Publish Date:</i> {{$product->created_at}}</p>
                 </div><!--/product-information-->
+                <div class="row">
+                    <b>Vote Rate: </b>
+                    @include('product-details.ratting-stars')
+                </div>
             </div>
         @elseif(!$product = $products->get(0))
             <div>
@@ -86,7 +89,8 @@
                     <div class="tab-pane fade active in" id="reviews">
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>{{$users->get($article->user_id)->name}}</a></li>
+                                <li><a href=""><i class="fa fa-user"></i>{{$users->get($article->user_id)->name}}</a>
+                                </li>
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
                             </ul>
