@@ -31,6 +31,7 @@
         });
         e.preventDefault();
         var ratting_value = $("input[name='rating']:checked").val();
+
         $.ajax({
             type: 'POST',
             cache: false,
