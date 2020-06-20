@@ -53,7 +53,6 @@
                     type: 'get',
                     url: '{{  url('pro_search') }}',
                     data: {
-
                         'search': $value
                     },
                     success:function(data){
