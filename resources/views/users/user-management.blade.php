@@ -41,7 +41,7 @@
                             <td class="cart_description" style = "border-right:none;padding-right:1px">
                                 @if($us->is_admin==0)
 								 <button  type = "button" class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_user({{$us->id}})"><span class="glyphicon glyphicon-trash"></span></button>
-                                 
+
                                 @endif
 							</td>
                             <td class="cart_description" style = "border-left:none;padding-left:0px;">
@@ -53,21 +53,20 @@
                         @endforeach
 					</tbody>
 				</table>
-			</div>               
+			</div>
 </div><!--/tab-pane-->
 <script type="text/javascript">
             function view_user(id){
 				window.open('/user/'.concat(id),'popup',200,300);
 			}
             $('#search').on('keyup',function(){
-				
+
                 $value = $(this).val();
 				console.log($value);
                 $.ajax({
                     type: 'get',
                     url: '{{  url('user_search') }}',
                     data: {
-						
                         'search': $value
                     },
                     success:function(data){
@@ -82,7 +81,7 @@
                         type: 'delete',
                         url: '{{  url('del_user') }}',
                         data: ({
-                            _token : $('meta[name="csrf-token"]').attr('content'), 
+                            _token : $('meta[name="csrf-token"]').attr('content'),
                             'id':id
                         }),
                         success:function(data){
@@ -91,16 +90,16 @@
                         }
                     });
               }
-				
+
 			}
-			
+
 			$.ajaxSetup({
  			 headers: {
   			  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
  				}
 			});
 			// $('#del_user').on('onclick',function(){
-                
+
             // })
             // $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
 </script>

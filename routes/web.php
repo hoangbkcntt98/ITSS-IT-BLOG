@@ -33,6 +33,9 @@ Route::get('/autocomplete', 'ListController@auto_complete')->name('autocomplete'
 
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
 Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
+Route::post('product-details/rate', 'ProductDetailsController@rate')->name('rating-star');
+Route::get('/product-details/{id}/edit', 'ProductDetailsController@edit')->name('edit-product');
+Route::post('product-details/{id}/save', 'ProductDetailsController@update')->name('product-details-update');
 
 Route::get('/articles/{id}', 'ArticleController@index')->name('show_article');
 Route::post('/articles/{id}','ArticleController@comment')->name('make_comment');
