@@ -23,6 +23,7 @@
                     <p><i>Publish Date:</i> {{$product->created_at}}</p>
                 </div><!--/product-information-->
                 <div class="row">
+<<<<<<< HEAD
                     <div id="vote-stars-result">
                         <b>Vote Rate: <i>(Total Rate: {{$product->count_rates}} votes, rate
                                 average: {{$product->stars_rate}})</i></b>
@@ -32,6 +33,13 @@
                         <div>
                             <a class="btn btn-primary btn-block pull-right"
                                href="/product-details/{{$product->id}}/edit">Edit</a>
+=======
+                    <b>Vote Rate: <i>(Total Rate: {{$product->count_rates}} votes, rate average: {{$product->stars_rate}})</i></b>
+                    @include('product-details.ratting-stars')
+                    @if($user != null && $user->is_admin == 1)
+                        <div>
+                            <a class="btn btn-primary btn-block pull-right" href="/product-details/{{$product->id}}/edit">Edit</a>
+>>>>>>> edit product and rate stars
                         </div>
                     @endif
                 </div>
@@ -64,20 +72,31 @@
                         </div>
                     </div>
                     @endforeach
+<<<<<<< HEAD
                     <a href="{{url()->current()."/create_article"}}">
                         <button type="button" class="btn btn-primary btn-lg pull-right">
                             Add Reviews
                         </button>
+=======
+                    <a class="btn btn-primary btn-lg pull-right" href="#">
+                        Add Reviews
+>>>>>>> edit product and rate stars
                     </a>
                 </div>
                 @elseif($articles->count()==0)
                     <div>
                         <h3>No Reviews For this product. Please add Reviews the product at here!!!</h3>
+<<<<<<< HEAD
                         <a href="{{url()->current()."/create_article"}}">
                             <button type="button" class="btn btn-primary btn-lg pull-right">
                                 Add Reviews
                             </button>
                         </a>
+=======
+                        <button type="button" class="btn btn-primary btn-lg pull-right">
+                            Add Reviews
+                        </button>
+>>>>>>> edit product and rate stars
                     </div>
                 @endif
 

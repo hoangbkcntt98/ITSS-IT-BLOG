@@ -59,8 +59,9 @@ class ProductDetailsController extends Controller {
         $productID = $data['prod_id'];
         $rate = $data['rate'];
         $product = Product::findOrFail($productID);
-        $product->stars_rate =($product->stars_rate * $product->count_rates + $rate)/($product->count_rates+1);
-        $product->stars_rate = round($product->stars_rate, 2);
+
+        $product->stars_rate = ($product->stars_rate * $product->count_rates + $rate)/($product->count_rates+1);
+
         $product->count_rates = $product->count_rates+1;
         $product->save();
         return $product;
