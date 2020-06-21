@@ -36,13 +36,16 @@
             cache: false,
             dataType: 'JSON',
             url: '/product-details/rate',
-            // data: JSON.stringify(array_value),
             data: {
                 'rate': ratting_value,
                 'prod_id': {{$product->id}}
             },
             success: function (data) {
-
+                var dataJson = JSON.parse(JSON.stringify(data));
+                console.log(dataJson["stars_rate"]);
+                $("#vote-stars-result").html(function (data){
+                    return "<b>Vote Rate: <i>(Total Rate:" + dataJson["count_rates"] + " votes, rate average " + dataJson["stars_rate"] + ")</i></b>\n"
+                })
             },
             error: function (data) {
                 console.log("error post rating stars " + data);

@@ -23,11 +23,15 @@
                     <p><i>Publish Date:</i> {{$product->created_at}}</p>
                 </div><!--/product-information-->
                 <div class="row">
-                    <b>Vote Rate: <i>(Total Rate: {{$product->count_rates}} votes, rate average: {{$product->stars_rate}})</i></b>
+                    <div id="vote-stars-result">
+                        <b>Vote Rate: <i>(Total Rate: {{$product->count_rates}} votes, rate
+                                average: {{$product->stars_rate}})</i></b>
+                    </div>
                     @include('product-details.ratting-stars')
                     @if($user != null && $user->is_admin == 1)
                         <div>
-                            <a class="btn btn-primary btn-block pull-right" href="/product-details/{{$product->id}}/edit">Edit</a>
+                            <a class="btn btn-primary btn-block pull-right"
+                               href="/product-details/{{$product->id}}/edit">Edit</a>
                         </div>
                     @endif
                 </div>
