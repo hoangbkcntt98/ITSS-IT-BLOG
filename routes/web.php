@@ -34,7 +34,7 @@ Route::get('/autocomplete', 'ListController@auto_complete')->name('autocomplete'
 Route::get('/product-details', 'ProductDetailsController@index')->name('product_details');
 Route::get('/product-details/{id}', 'ProductDetailsController@show')->name('show_product_details');
 
-Route::get('/articles/{id}', 'ArticleController@index')->name('show_article');
-Route::post('/articles/{id}','ArticleController@comment')->name('make_comment');
-Route::get('/product-details/{id}/create_article','ArticleController@show_form')->name('show_new_article_form');
+Route::get('/product-details/{id}/articles', 'ArticleController@index')->name('show_article');
+Route::post('/product-details/{id}/articles','ArticleController@comment')->name('make_comment');
+Route::get('/product-details/{id}/create_article','ArticleController@show_form')->name('show_new_article_form   ');
 Route::post('/product-details/{id}/create_article','ArticleController@create')->name('create_new_article');
