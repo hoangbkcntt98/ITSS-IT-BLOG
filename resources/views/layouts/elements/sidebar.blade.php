@@ -65,7 +65,7 @@
 								</div>
 							</div>
 						</div><!--/category-products-->
-					
+
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
 							<div class="brands-name">
@@ -78,7 +78,7 @@
 								</ul>
 							</div>
 						</div><!--/brands_products-->
-						
+
 						<div class="price-range"><!--price-range-->
 							<h2>Price Range</h2>
 							<div class="well text-center">
@@ -86,9 +86,9 @@
 								 <b class="pull-left">$ 0</b> <b class="pull-right">$ 5000</b>
 							</div>
 						</div>
-						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
-					
+
+{{--						<div class="shipping text-center"><!--shipping-->--}}
+{{--							<img src="images/home/shipping.jpg" alt="" />--}}
+{{--						</div><!--/shipping-->--}}
+
 					</div>

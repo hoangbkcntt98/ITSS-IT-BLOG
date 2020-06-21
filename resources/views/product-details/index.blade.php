@@ -60,20 +60,24 @@
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
                             </ul>
-                            <a href="#">{{$article->title}}</a>
+                            <a href={{url()->current()."/articles"}}>{{$article->title}}</a>
                         </div>
                     </div>
                     @endforeach
-                    <a class="btn btn-primary btn-lg pull-right" href="#">
-                        Add Reviews
+                    <a href="{{url()->current()."/create_article"}}">
+                        <button type="button" class="btn btn-primary btn-lg pull-right">
+                            Add Reviews
+                        </button>
                     </a>
                 </div>
                 @elseif($articles->count()==0)
                     <div>
                         <h3>No Reviews For this product. Please add Reviews the product at here!!!</h3>
-                        <button type="button" class="btn btn-primary btn-lg pull-right">
-                            Add Reviews
-                        </button>
+                        <a href="{{url()->current()."/create_article"}}">
+                            <button type="button" class="btn btn-primary btn-lg pull-right">
+                                Add Reviews
+                            </button>
+                        </a>
                     </div>
                 @endif
 

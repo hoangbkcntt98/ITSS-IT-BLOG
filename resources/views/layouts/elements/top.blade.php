@@ -33,7 +33,7 @@
 						<div class="pull-left">
 							<a href="{{route('/')}}"><img src="{{asset('layouts/images')}}/home/logo.png" alt="" height="60px" /></a>
 						</div>
-						
+
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
@@ -85,21 +85,21 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="index.html" class="active">Home</a></li>
-								<li><a href="contact-us.html">News</a></li>
+								<li><a href="/" class="active">Home</a></li>
+								<li><a href="#">News</a></li>
 								<li class="dropdown"><a href="/list">Products<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="/list">Products</a></li>
-										<li><a href="/product-details">Product Details</a></li>
+{{--										<li><a href="/product-details">Product Details</a></li>--}}
                                     </ul>
                                 </li>
-								<li class="dropdown"><a href="#">Reviews<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Top </a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                    </ul>
-                                </li>
-								<li><a href="contact-us.html">Contact</a></li>
+{{--								<li class="dropdown"><a href="#">Reviews<i class="fa fa-angle-down"></i></a>--}}
+{{--                                    <ul role="menu" class="sub-menu">--}}
+{{--                                        <li><a href="blog.html">Top </a></li>--}}
+{{--										<li><a href="blog-single.html">Blog Single</a></li>--}}
+{{--                                    </ul>--}}
+{{--                                </li>--}}
+								<li><a href="#">Contact</a></li>
 							</ul>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
  $(document).ready(function () {
-	$('#query').keyup(function(){ 
+	$('#query').keyup(function(){
 		var query = $(this).val();
 		if(query != '')
 		{
