@@ -6,7 +6,7 @@
         <div class="card-header title">{{$article->title}}</div>
         <div class="card-body">
             <div>
-                <img src="../images/{{$article->image}}"
+                <img src="{{asset('/images')}}/{{$article->image}}"
                      class="image"
                      alt="product_image">
             </div>
@@ -38,7 +38,6 @@
                             <p class="text">{{$comment->content}}</p>
                         </div>
                     </div>
-                    </br>
                 @endforeach
             </div>
             <h4>Add a comment</h4>
@@ -58,7 +57,7 @@
         if(value!=null){
             $.ajax({
             type: 'post',
-            url: '{{  url('articles/'.$article->id) }}',
+            url: '{{  url(url()->current()) }}',
                 data: ({
                     _token : $('meta[name="csrf-token"]').attr('content'),
                     comment: value

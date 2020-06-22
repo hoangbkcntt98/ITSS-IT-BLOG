@@ -36,11 +36,11 @@
 							</td>
 							<td class="cart_description" style = 'border-right:none;padding-right:0px;'>
 								<button class = "btn btn-danger btn-sm" value = "Delete"  onclick = "del_post({{$post->id}})"><span class="glyphicon glyphicon-trash"></span></button>
-								
+
 							</td>
 							<td class="cart_description" style = 'border-left:none;padding-left:0px;'>
 								<button class = "btn btn-success btn-sm" value = "Detail"  onclick = "view_post({{$post->id}})">Detail </button>
-							</td>	
+							</td>
 
 						</tr>
                         @endforeach
@@ -84,7 +84,7 @@
 				}
 			}
 			function view_post(id){
-				window.open('product-details/'.concat(id,'/articles'),'popup',200,300);
+				window.open('product-details/'.concat(id,'/articles/'.{{}}),'popup',200,300);
 			}
 			$.ajaxSetup({
  			 headers: {

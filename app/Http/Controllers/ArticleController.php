@@ -20,7 +20,7 @@ class ArticleController extends Controller
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
 
-    public function comment(Request $request, $id_article){
+    public function comment(Request $request, $prod_id, $id_article){
         $new_comment = new Comment();
 
 
