@@ -11,7 +11,7 @@ class ListController extends Controller
 {
     public function index()
     {
-        $products = DB::table('products')->paginate(12);
+        $products = DB::table('products')->join('brand', 'products.brand_id', 'brand.id')->paginate(12);
         return view('list.index', ['products'=>$products]);
     }
 

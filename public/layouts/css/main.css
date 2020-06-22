@@ -905,6 +905,8 @@ h2.title {
 
 .productinfo {
     position: relative;
+    background-color: rgb(247, 247, 247);
+
 }
 
 .product-overlay {
