@@ -39,7 +39,7 @@
 
 							</td>
 							<td class="cart_description" style = 'border-left:none;padding-left:0px;'>
-								<button class = "btn btn-success btn-sm" value = "Detail"  onclick = "view_post({{$post->id}})">Detail </button>
+								<button class = "btn btn-success btn-sm" value = "Detail"  onclick = "view_post({{$post->id}},{{$post->product_id}})">Detail </button>
 							</td>
 
 						</tr>
@@ -83,8 +83,8 @@
                 	});
 				}
 			}
-			function view_post(id){
-				window.open('product-details/'.concat(id,'/articles/'.{{}}),'popup',200,300);
+			function view_post(id,product_id){
+				window.open('product-details/'.concat(product_id,'/articles/',id),'popup',200,300);
 			}
 			$.ajaxSetup({
  			 headers: {

@@ -32,9 +32,9 @@ class ProfileController extends Controller
         $id = Auth::id();
         $user = User::findOrFail($id);
 
-        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->get();
         if($user->is_admin == 0){
-            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->where('articles.user_id','=',$user->id)->get();
         }
         $users = User::all();
         $product = DB::table('products')->get();
@@ -127,9 +127,9 @@ class ProfileController extends Controller
         $user = Auth::user();
         if ($request->ajax()) {
 
-            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->where([['title', 'LIKE', '%' . $request->search . '%']])->get();
             if($user->is_admin == 0){
-                $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->where([['title', 'LIKE', '%' . $request->search . '%'],['articles.user_id','=',$user->id]])->get();
+                $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->where([['title', 'LIKE', '%' . $request->search . '%'],['articles.user_id','=',$user->id]])->get();
             }
             $output_post = "";
             if ($posts) {
@@ -137,7 +137,7 @@ class ProfileController extends Controller
                     $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                     $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                     $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
-                    $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
+                    $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.",".$post->product_id.")'>Detail </button>";
                     $output_post .= "<tr>
                     <td class='cart_description'><h5>" . $post->name . "</h5></td>
                     <td class='cart_description'><h5>" . $post->title . "</h5></td>
@@ -192,9 +192,9 @@ class ProfileController extends Controller
         $delete_button="";
         $users = User::all();
 
-        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->get();
         if($user->is_admin == 0){
-            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->where('articles.user_id','=',$user->id)->get();
         }
         if ($users) {
             foreach ($users as $user) {
@@ -226,7 +226,7 @@ class ProfileController extends Controller
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                 $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
-                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
+                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.",".$post->product_id.")'>Detail </button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
@@ -246,9 +246,9 @@ class ProfileController extends Controller
         $user = Auth::user();
         $posts_del =DB::table('articles')->where('id','=',$request->id)->delete();
 
-        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->get();
+        $posts =  DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->get();
         if($user->is_admin == 0){
-            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title')->where('articles.user_id','=',$user->id)->get();
+            $posts = DB::table('articles')->join('users','articles.user_id','=','users.id')->join('products','articles.product_id','=','products.id')->select('name', 'articles.id','product_name','articles.created_at','articles.updated_at','articles.title','articles.product_id')->where('articles.user_id','=',$user->id)->get();
         }
         $output_post = "";
         if ($posts) {
@@ -256,7 +256,7 @@ class ProfileController extends Controller
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                 $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
-                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
+                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.",".$post->product_id.")'>Detail </button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
