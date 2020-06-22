@@ -34,9 +34,13 @@
                             <td class="cart_description">
 								<h5>{{ \Carbon\Carbon::parse($post->updated_at)->format('d/m/Y g:i A')}}</h5>
 							</td>
-							<td class="cart_description">
-								<button class = "btn btn-danger btn-sm" value = "Delete" id = "del_user" onclick = "del_post({{$post->id}})"><span class="glyphicon glyphicon-trash"></span></button>
+							<td class="cart_description" style = 'border-right:none;padding-right:0px;'>
+								<button class = "btn btn-danger btn-sm" value = "Delete"  onclick = "del_post({{$post->id}})"><span class="glyphicon glyphicon-trash"></span></button>
+								
 							</td>
+							<td class="cart_description" style = 'border-left:none;padding-left:0px;'>
+								<button class = "btn btn-success btn-sm" value = "Detail"  onclick = "view_post({{$post->id}})">Detail </button>
+							</td>	
 
 						</tr>
                         @endforeach
@@ -78,6 +82,9 @@
                     }
                 	});
 				}
+			}
+			function view_post(id){
+				window.open('product-details/'.concat(id,'/articles'),'popup',200,300);
 			}
 			$.ajaxSetup({
  			 headers: {

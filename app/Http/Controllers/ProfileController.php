@@ -76,6 +76,15 @@ class ProfileController extends Controller
                 ])->save();
             }
         }
+
+        if($request->hasFile('image')){
+           
+            $image = $request->file('image');
+           
+            $image->move('images', $user->id.$image->clientExtension());
+            $user->img = $user->id.$image->clientExtension();
+        }
+        
         $user->save();
         return redirect('user/'.$id);
     }
@@ -128,13 +137,15 @@ class ProfileController extends Controller
                     $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                     $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                     $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
+                    $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
                     $output_post .= "<tr>
                     <td class='cart_description'><h5>" . $post->name . "</h5></td>
                     <td class='cart_description'><h5>" . $post->title . "</h5></td>
                     <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
                     <td class='cart_description'><h5>" . $create . "</h5></td>
                     <td class='cart_description'><h5>" . $update . "</h5></td>
-                    <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                    <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                    <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                     </tr>";
                 }
             }
@@ -157,7 +168,8 @@ class ProfileController extends Controller
                     <td class='cart_description'><h5>" . $pro->RAM. "</h5></td>
                     <td class='cart_description'><h5>" . $pro->OS . "</h5></td>
                     <td class='cart_description'><h5>" . $pro->price . "</h5></td>
-                    <td class='cart_description'>" . $delete_button . $detail_button. "</td>
+                    <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                    <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                     </tr>";
                 }
             }
@@ -214,13 +226,15 @@ class ProfileController extends Controller
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                 $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
+                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
                 <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
                 <td class='cart_description'><h5>" . $create . "</h5></td>
                 <td class='cart_description'><h5>" . $update . "</h5></td>
-                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                 </tr>";
             }
         }
@@ -242,13 +256,15 @@ class ProfileController extends Controller
                 $create= Carbon::parse($post->created_at)->format('d/m/Y g:i A');
                 $update= Carbon::parse($post->updated_at)->format('d/m/Y g:i A');
                 $delete_button = " <button class = 'btn btn-danger btn-sm' value = 'Delete' id = 'del_user' onclick = 'del_post(".$post->id.")'><span class='glyphicon glyphicon-trash'></span></button>";
+                $detail_button = "<button class = 'btn btn-success btn-sm' value = 'Detail'  onclick = 'view_post(".$post->id.")'>Detail </button>";
                 $output_post .= "<tr>
                 <td class='cart_description'><h5>" . $post->name . "</h5></td>
                 <td class='cart_description'><h5>" . $post->title . "</h5></td>
                 <td class='cart_description'><h5>" . $post->product_name . "</h5></td>
                 <td class='cart_description'><h5>" . $create . "</h5></td>
                 <td class='cart_description'><h5>" . $update . "</h5></td>
-                <td class='cart_description'><h5>" . $delete_button . "</h5></td>
+                <td class='cart_description' style = 'border-right:none;padding-right:1px'>" . $delete_button . "</td>
+                <td class='cart_description' style = 'border-left:none;padding-left:0px;'>" . $detail_button . "</td>
                 </tr>";
             }
         }
@@ -274,5 +290,27 @@ class ProfileController extends Controller
             }
         }
         return Response($output_pro);
+    }
+    public function saveImage(Request $request){
+        $user_id = Auth::id();
+        request()->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+ 
+        if ($files = $request->file('image')) {
+ 
+            $image = $request->image->store('public/images');
+            $request->photo->storeAs('image', $user_id.'.jpg');
+            return Response()->json([
+                "success" => true,
+                "image" => $image
+            ]);
+ 
+        }
+ 
+        return Response()->json([
+                "success" => false,
+                "image" => ''
+            ]);
     }
 }

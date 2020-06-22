@@ -19,16 +19,20 @@ class ProductDetailsSeeder extends Seeder
         $ram = ['4','8','16','32'];
         $disk = ['128','256','512'];
         $size = [12,14.5,14,15.6,17];
+        $gr = ['Intel','AMD','Gefore'];
+        $os = ['Windows 10/7/8','Ubuntu','MacOS'];
+        $names = ['HP-3415','Acer-1234','Macbook Pro 2019','Lenovo -1234'];
+        $images = ['http://localhost:8000/images/products/hp.jpg','http://localhost:8000/images/products/htvp-v2.png','http://localhost:8000/images/products/lap1.jpg'];
         for($i = 0; $i < $products_count; $i++){
 
             DB::table('products')->insert([
-                'product_name' => $fake->name,
-                'image' => $fake->unique()->imageUrl(),
+                'product_name' => $fake->randomElement($names),
+                'image' => $fake->randomElement($images),
                 'CPU' => $fake->randomElement($cpu),
                 'RAM' => $fake->randomElement($ram),
                 'disk' => $fake->randomElement($disk),
-                'graphic_card' => $fake->text(30),
-                'OS' => $fake->text(10),
+                'graphic_card' =>$fake->randomElement($gr),
+                'OS' => $fake->randomElement($os),
                 'size' => $fake->randomElement($size),
                 'price' => $fake->numberBetween(1000, 5000),
                 'created_at' => $fake->dateTime,
