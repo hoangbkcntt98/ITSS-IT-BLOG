@@ -11,7 +11,7 @@ class ListController extends Controller
 {
     public function index()
     {
-        $products = DB::table('products')->paginate(12);
+        $products = DB::table('products')->orderBy('products.id')->paginate(12);
         return view('list.index', ['products'=>$products]);
     }
 

@@ -13,11 +13,11 @@
 								<div id="laptop" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="#">DELL </a></li>
-											<li><a href="#">ASUS </a></li>
-											<li><a href="#">APPLE </a></li>
-											<li><a href="#">HP</a></li>
-											<li><a href="#">LENOVO </a></li>
+											<li><a href="/filter?brand_id=4">DELL </a></li>
+											<li><a href="/filter?brand_id=3">ASUS </a></li>
+											<li><a href="/filter?brand_id=2">APPLE </a></li>
+											<li><a href="/filter?brand_id=5">HP</a></li>
+											<li><a href="/filter?brand_id=6">LENOVO </a></li>
 										</ul>
 									</div>
 								</div>
@@ -34,11 +34,11 @@
 								<div id="tablet" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="#">DELL </a></li>
-											<li><a href="#">ASUS </a></li>
-											<li><a href="#">APPLE </a></li>
-											<li><a href="#">HP</a></li>
-											<li><a href="#">LENOVO </a></li>
+											<li><a href="/filter?brand_id=4">DELL </a></li>
+											<li><a href="/filter?brand_id=3">ASUS </a></li>
+											<li><a href="/filter?brand_id=2">APPLE </a></li>
+											<li><a href="/filter?brand_id=5">HP</a></li>
+											<li><a href="/filter?brand_id=6">LENOVO </a></li>
 										</ul>
 									</div>
 								</div>
@@ -55,11 +55,11 @@
 								<div id="pc" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul>
-											<li><a href="#">DELL </a></li>
-											<li><a href="#">ASUS </a></li>
-											<li><a href="#">APPLE </a></li>
-											<li><a href="#">HP</a></li>
-											<li><a href="#">LENOVO </a></li>
+											<li><a href="/filter?brand_id=4">DELL </a></li>
+											<li><a href="/filter?brand_id=3">ASUS </a></li>
+											<li><a href="/filter?brand_id=2">APPLE </a></li>
+											<li><a href="/filter?brand_id=5">HP</a></li>
+											<li><a href="/filter?brand_id=6">LENOVO </a></li>
 										</ul>
 									</div>
 								</div>
@@ -70,11 +70,11 @@
 							<h2>Brands</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>DELL</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>ASUS</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>APPLE</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>LENOVO</a></li>
-									<li><a href="#"> <span class="pull-right">(5)</span>HP</a></li>
+									<li><a href="/filter?brand_id=4"> <span class="pull-right"></span>DELL</a></li>
+									<li><a href="/filter?brand_id=3"> <span class="pull-right"></span>ASUS</a></li>
+									<li><a href="/filter?brand_id=2"> <span class="pull-right"></span>APPLE</a></li>
+									<li><a href="/filter?brand_id=6"> <span class="pull-right"></span>LENOVO</a></li>
+									<li><a href="/filter?brand_id=5"> <span class="pull-right"></span>HP</a></li>
 								</ul>
 							</div>
 						</div><!--/brands_products-->

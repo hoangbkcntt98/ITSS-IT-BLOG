@@ -27,14 +27,13 @@
                                         <a href="{{ url('product-details', [$product->id]) }}"><img src="{{$product->image}}" alt="product" class="product-img"></a>
                                         <a href="{{ url('product-details', [$product->id]) }}"><h3>{{ $product->product_name }}</h3> </a>
                                         <div class="star">
-                                            <p>{{ $product->price }}</p>
+                                            <p>{{ $product->stars_rate }}</p>
                                             <img src="layouts/images/home/star.png" alt="" class="star-rating">
                                         </div>
                                     </div> <!-- end caption -->
                                     <div class="product-overlay">
                                         <div class="overlay-content">
                                             <a href="{{ url('product-details', [$product->id]) }}">
-                                                <p><b>Brand:</b>{{ $product->product_name }}</p>
                                                 <p><b>CPU:</b>{{$product->CPU}}</p>
                                                 <p><b>RAM:</b> {{$product->RAM}}</p>
                                                 <p><b>Disk:</b> {{$product->disk}}</p>
