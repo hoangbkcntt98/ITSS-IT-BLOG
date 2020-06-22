@@ -37,7 +37,7 @@ Route::post('product-details/rate', 'ProductDetailsController@rate')->name('rati
 Route::get('/product-details/{id}/edit', 'ProductDetailsController@edit')->name('edit-product');
 Route::post('product-details/{id}/save', 'ProductDetailsController@update')->name('product-details-update');
 
-Route::get('/product-details/{id}/articles', 'ArticleController@index')->name('show_article');
-Route::post('/product-details/{id}/articles','ArticleController@comment')->name('make_comment');
+Route::get('/product-details/{id}/articles/{id_article}', 'ArticleController@index')->name('show_article');
+Route::post('/product-details/{id}/articles/{id_article}','ArticleController@comment')->name('make_comment');
 Route::get('/product-details/{id}/create_article','ArticleController@show_form')->name('show_new_article_form   ');
 Route::post('/product-details/{id}/create_article','ArticleController@create')->name('create_new_article');

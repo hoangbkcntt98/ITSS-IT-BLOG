@@ -60,7 +60,7 @@
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
                             </ul>
-                            <a href={{url()->current()."/articles"}}>{{$article->title}}</a>
+                            <a href={{url()->current()."/articles/".$article->id}}}>{{$article->title}}</a>
                         </div>
                     </div>
                     @endforeach

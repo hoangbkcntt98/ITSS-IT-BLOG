@@ -9,24 +9,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class ArticleController extends Controller
 {
-    public function index($id){
-        // $article = Article::where('id',$id)->first();
-        $article = DB::table('articles')->where('id',$id)->first();
+    public function index($id_article){
+        $article = DB::table('articles')->where('id',$id_article)->first();
         $author = User::where('id',$article->user_id)->first();
-        $comments = Comment::where('article_id','=',$id)
+        $comments = Comment::where('article_id','=',$id_article)
             ->join('users','comments.user_id','=','users.id')
             ->select( 'comments.content','comments.published_at','users.name')->get();
 
         return view('articles.index',['article'=>$article,'comments'=>$comments,'author'=>$author]);
     }
 
-    public function comment(Request $request, $id){
+    public function comment(Request $request, $id_article){
         $new_comment = new Comment();
 
 
         $new_comment->content = $request->comment;
 
-        $new_comment->article_id = $id;
+        $new_comment->article_id = $id_article;
         $new_comment->user_id = Auth::id();
         $new_comment->published_at = \Carbon\Carbon::now();
 
@@ -62,6 +61,6 @@ class ArticleController extends Controller
         $new_article->user_id = Auth::id();
         $new_article->save();
 
-        return redirect('/articles/'.$new_article->id);
+        return redirect('product-details/'.$new_article->product_id);
     }
 }
