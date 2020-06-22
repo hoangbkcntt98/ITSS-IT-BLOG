@@ -30,6 +30,7 @@ class ProductDetailsController extends Controller {
         $product = Product::findProductById($id);
         $product_article = Product::getArticlesProduct($id);
         $users = User::all();
+//        dd($users);
         return view('product-details.index', ['products'=>$product, 'articles'=>$product_article, 'users'=>$users, 'user'=>$user]);
     }
 

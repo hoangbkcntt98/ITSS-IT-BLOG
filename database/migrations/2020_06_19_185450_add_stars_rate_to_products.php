@@ -15,7 +15,7 @@ class AddStarsRateToProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->integer('stars_rate')->default(0);
+            $table->float('stars_rate')->default(0);
             $table->integer('count_rates')->default(0);
         });
     }

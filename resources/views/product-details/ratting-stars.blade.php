@@ -31,7 +31,7 @@
         });
         e.preventDefault();
         var ratting_value = $("input[name='rating']:checked").val();
-
+        var pathUrl = window.location.pathname;
         $.ajax({
             type: 'POST',
             cache: false,
@@ -39,7 +39,7 @@
             url: '/product-details/rate',
             data: {
                 'rate': ratting_value,
-                'prod_id': {{$product->id}}
+                'prod_id': pathUrl.split("/", 3)[2]
             },
             success: function (data) {
                 var dataJson = JSON.parse(JSON.stringify(data));

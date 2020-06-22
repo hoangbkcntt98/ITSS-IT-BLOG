@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class ArticleController extends Controller
 {
-    public function index($id_article){
+    public function index($prod_id, $id_article){
+//        dd($prod_id, $id_article);
         $article = DB::table('articles')->where('id',$id_article)->first();
         $author = User::where('id',$article->user_id)->first();
         $comments = Comment::where('article_id','=',$id_article)
@@ -60,7 +61,6 @@ class ArticleController extends Controller
 
         $new_article->user_id = Auth::id();
         $new_article->save();
-
-        return redirect('product-details/'.$new_article->product_id);
+        return redirect()->route('show_product_details', ['id' => $new_article->product_id]);
     }
 }

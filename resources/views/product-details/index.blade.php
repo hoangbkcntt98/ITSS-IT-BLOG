@@ -32,12 +32,7 @@
                     @if($user != null && $user->is_admin == 1)
                         <div>
                             <a class="btn btn-primary btn-block pull-right"
-                               href="/product-details/{{$product->id}}/edit">Edit</a>
-                    <b>Vote Rate: <i>(Total Rate: {{$product->count_rates}} votes, rate average: {{$product->stars_rate}})</i></b>
-                    @include('product-details.ratting-stars')
-                    @if($user != null && $user->is_admin == 1)
-                        <div>
-                            <a class="btn btn-primary btn-block pull-right" href="/product-details/{{$product->id}}/edit">Edit</a>
+                               href={{url()->current()."/edit"}}>Edit</a>
                         </div>
                     @endif
                 </div>
@@ -61,20 +56,22 @@
                     <div class="tab-pane fade active in" id="reviews">
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>{{$users->get($article->user_id)->name}}</a>
+                                <li><a href=""><i class="fa fa-user"></i>{{$users[$article->user_id-1]->name}}</a>
                                 </li>
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
                             </ul>
-                            <a href={{url()->current()."/articles/".$article->id}}}>{{$article->title}}</a>
+                            <a href={{url()->current()."/articles/".$article->id}}>{{$article->title}}</a>
                         </div>
                     </div>
                     @endforeach
-                    <a href="{{url()->current()."/create_article"}}">
-                        <button type="button" class="btn btn-primary btn-lg pull-right">
-                            Add Reviews
-                        </button>
-                    </a>
+                    @if($user != null)
+                        <a href="{{url()->current()."/create_article"}}">
+                            <button type="button" class="btn btn-primary btn-lg pull-right">
+                                Add Reviews
+                            </button>
+                        </a>
+                    @endif
                 </div>
                 @elseif($articles->count()==0)
                     <div>

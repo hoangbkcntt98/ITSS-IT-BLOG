@@ -70,7 +70,7 @@
                     <div class="tab-pane fade active in" id="reviews">
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>{{$users->get($article->user_id)->name}}</a>
+                                <li><a href=""><i class="fa fa-user"></i>{{$users[$article->user_id-1]->name}}</a>
                                 </li>
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
