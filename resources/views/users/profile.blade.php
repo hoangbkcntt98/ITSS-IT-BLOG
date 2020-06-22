@@ -33,15 +33,18 @@ $(document).ready(function() {
               
 
       <div class="text-center">
+      {!! Form::open(['action' => ['ProfileController@update',$user->id],'method'=>'PUT','role'=>'form','enctype'=>'multipart/form-data']) !!}
+        @if($user->img=='http://ssl.gstatic.com/accounts/ui/avatar_2x.png')
         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar" style = "width:200px;height:200px;">
+        @else
+        <img src="../images/{{$user->img}}" class="avatar img-circle img-thumbnail" alt="avatar" style = "width:200px;height:200px;">
+        @endif
         <h6>Upload a different photo...</h6>
-        <input type="file" class="text-center center-block file-upload">
-      </div></hr><br>
-
-               
+        {{Form::file('image',['class' => 'text-center center-block file-upload'])}}
+      </div></hr><br>      
           <div class="panel panel-default">
             <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
-            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+            <div class="panel-body"><a href="http://bootnipets.com">{{$user->email}}</a></div>
           </div>
           
           
@@ -75,8 +78,8 @@ $(document).ready(function() {
           <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <hr>
-                {!! Form::open(['action' => ['ProfileController@update',$user->id],'method'=>'PUT','class'=>'form-horizontal','role'=>'form']) !!}
-                  <form class="form" action="##" method="post" id="registrationForm">
+                
+                  <div class='form-horizontal'>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
@@ -124,7 +127,7 @@ $(document).ready(function() {
                             </div>
                       </div>
                       {!! Form::close() !!}
-              
+                      </div>
               <hr> 
              </div><!--/tab-pane-->
              @include("users.user-management")
