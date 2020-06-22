@@ -20,7 +20,7 @@
                     <p><b>Graphic Card:</b> {{$product->graphic_card}}</p>
                     <p><b>OS:</b> {{$product->OS}}</p>
                     <p><b>Size:</b> {{$product->size}}</p>
-                    <p><i>Publish Date:</i> {{$product->created_at}}</p>
+                    <p><i>Publish Date:</i> {{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</p>
                 </div><!--/product-information-->
                 <div class="row">
 
@@ -50,13 +50,13 @@
                 <li class="active"><a href="#reviews" data-toggle="tab">Reviews</a></li>
             </ul>
         </div>
-        @if($articles->count() > 0)
-            @foreach($articles as $article)
+        @if($list_articles != null)
+            @foreach($list_articles as $article)
                 <div class="tab-content">
                     <div class="tab-pane fade active in" id="reviews">
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>{{$users[$article->user_id-1]->name}}</a>
+                                <li><a href=""><i class="fa fa-user"></i>{{$article->name}}</a>
                                 </li>
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
@@ -73,7 +73,7 @@
                         </a>
                     @endif
                 </div>
-                @elseif($articles->count()==0)
+                @elseif($list_articles == null)
                     <div>
                         <h3>No Reviews For this product. Please add Reviews the product at here!!!</h3>
                         <a href="{{url()->current()."/create_article"}}">

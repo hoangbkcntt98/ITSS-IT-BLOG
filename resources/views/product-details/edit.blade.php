@@ -48,7 +48,7 @@
                         </div>
                         <button type="submit" class="btn btn-info">Submit</button>
                     </form>
-                    <p><i>Publish Date:</i> {{$product->created_at}}</p>
+                    <p><i>Publish Date:</i> {{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}</p>
                 </div><!--/product-information-->
             </div>
         @elseif(!$product = $products->get(0))
@@ -64,18 +64,18 @@
                 <li class="active"><a href="#reviews" data-toggle="tab">Reviews</a></li>
             </ul>
         </div>
-        @if($articles->count() > 0)
-            @foreach($articles as $article)
+        @if($list_articles != null)
+            @foreach($list_articles as $article)
                 <div class="tab-content">
                     <div class="tab-pane fade active in" id="reviews">
                         <div class="col-sm-12">
                             <ul>
-                                <li><a href=""><i class="fa fa-user"></i>{{$users[$article->user_id-1]->name}}</a>
+                                <li><a href=""><i class="fa fa-user"></i>{{$article->name}}</a>
                                 </li>
                                 <li><a href=""><i class="fa fa-clock-o"></i>{{$article->created_at}}</a></li>
                                 <li><a href=""><i class="fa fa-calendar-o"></i>{{$article->updated_at}}</a></li>
                             </ul>
-                            <a href="#">{{$article->title}}</a>
+                            <a href={{url()->current()."/articles/".$article->id}}>{{$article->title}}</a>
                         </div>
                     </div>
                     @endforeach
@@ -83,7 +83,7 @@
                         Add Reviews
                     </button>
                 </div>
-                @elseif($articles->count()==0)
+                @elseif($list_articles == null)
                     <div>
                         <h3>No Reviews For this product. Please add Reviews the product at here!!!</h3>
                         <button type="button" class="btn btn-primary btn-lg pull-right">
