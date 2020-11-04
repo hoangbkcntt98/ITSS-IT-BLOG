@@ -8,7 +8,7 @@ BY 'nhập pass vào đây/ không có để trống';
 - php artisan db:seed
 - chạy npm install && npm run dev
 - php artisan serve
-- Cài đặt file .env: Thay đoạn này vào
+- Cài đặt file .env(xóa example đi :)): Thay đoạn này vào
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
