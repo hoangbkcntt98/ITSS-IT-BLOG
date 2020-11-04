@@ -15,6 +15,7 @@ DB_PORT=3306
 DB_DATABASE=database
 DB_USERNAME=root
 DB_PASSWORD=
+- php artisan key:gen
 - php artisan serve 
 - Mở localhost:8000 lên
 # Cách tạo một view 
