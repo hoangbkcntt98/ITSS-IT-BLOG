@@ -4,6 +4,8 @@
 - Tạo 1 database tên là "database"
 - chạy php artisan migrate // Đoạn này ông nào dùng workbench bị lỗi thì chạy dòng sql này : ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password
 BY 'nhập pass vào đây/ không có để trống';  
+- vẫn lỗi thì copy cái php.ini vào ~/xampp/php/
+- php artisan db:seed
 - chạy npm install && npm run dev
 - php artisan serve
 - Cài đặt file .env: Thay đoạn này vào
@@ -13,6 +15,7 @@ DB_PORT=3306
 DB_DATABASE=database
 DB_USERNAME=root
 DB_PASSWORD=
+- php artisan key:gen
 - php artisan serve 
 - Mở localhost:8000 lên
 # Cách tạo một view 
